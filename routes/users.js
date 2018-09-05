@@ -86,6 +86,16 @@ router.put('/userReg/edit/:id', (req, res, next) => {
   //);
   });
 
+  //delete route
+  router.delete('/userReg/delete/:id',(req, res) => {
+    UserReg.findByIdAndRemove( req.params.id, (err, data) => {
+     if(err)
+             console.log(err);
+         else 
+             res.send(data);
+    }) 
+ });
+
 
 /* END OF Routes and Endpoints for UserReg */
 
