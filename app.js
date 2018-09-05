@@ -14,13 +14,7 @@ var assetsRouter = require('./routes/assets');
 var eventsRouter = require('./routes/events');
 var utilitiesRouter = require('./routes/utilities');
 
-
-
-
 var app = express();
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
