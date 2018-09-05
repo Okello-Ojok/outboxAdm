@@ -10,6 +10,16 @@ require('./models/db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var assetsRouter = require('./routes/assets');
+var brandingRouter = require('./routes/branding');
+var consumptionRouter = require('./routes/consumption');
+var eventsRouter = require('./routes/events');
+var paymentsRouter = require('./routes/payments');
+var servicesRouter = require('./routes/services');
+var utilitiesRouter = require('./routes/utilities');
+
+
+
 
 var app = express();
 
