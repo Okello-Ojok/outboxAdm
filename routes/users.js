@@ -46,6 +46,15 @@ router.post('/userReg/add', (req, res, next) => {
   });
 });
 
+//geting user by id
+router.get('/userReg/:id', (req, res, next) => {
+  UserReg.findById(req.params.id, (err, issues) => {
+      if(err)
+          console.log(err);
+      else 
+          res.send(issues);
+  });
+});
 /* END OF Routes and Endpoints for UserReg */
 
 
