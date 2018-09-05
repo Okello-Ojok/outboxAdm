@@ -18,13 +18,7 @@ var paymentsRouter = require('./routes/payments');
 var servicesRouter = require('./routes/services');
 var utilitiesRouter = require('./routes/utilities');
 
-
-
-
 var app = express();
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
