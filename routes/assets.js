@@ -9,7 +9,7 @@ const Assets = mongoose.model('Assets');
 //Routes and Endpoints for Assets
 
 //Get all assets
-router.get('', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Assets.find((err, data) => {
       if (err) {
         res.send(err)
