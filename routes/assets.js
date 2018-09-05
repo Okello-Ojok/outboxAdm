@@ -9,13 +9,6 @@ const Assets = mongoose.model('Assets');
 //Routes and Endpoints for Assets
 
 //Get all assets
-<<<<<<< HEAD
-router.get('/', (req, res, next) => {
-    Assets.find((err, data) => {
-      if (err) {
-        res.send(err)
-      } else {
-=======
 router.get('', (req, res, next) => {
   Assets.find((err, data) => {
     if (err) {
@@ -34,7 +27,6 @@ router.get('/:id', (req, res, next) => {
   if (req.params && req.params.id) {
     Assets.findById(req.params.id, (err, data) => {
       if (data) {
->>>>>>> bdf9510e113a0fd06401ba196feb19b3d8c18931
         res.json(data);
       } else {
         res.send(err)
