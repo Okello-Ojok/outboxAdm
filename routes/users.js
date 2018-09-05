@@ -6,13 +6,7 @@ var mongoose = require('mongoose');
 const UserReg = mongoose.model('UserReg');
 
 
-/* GET users listing. */
-router.get('/users', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
-
-<<<<<<< HEAD
 /* Routes and Endpoints for UserReg */
 
 //get userRegInfo
@@ -38,7 +32,19 @@ router.post('/userReg/add', (req, res, next) => {
     altphone: req.body.altphone,
     idType: req.body.idType,
     idNumber: req.body.idNumber,
-    company: req.body.company
+    company: req.body.company,
+    userName: req.body.userName,
+    password: req.body.password,
+    roles: req.body.roles,
+    dateJoined: req.body.dateJoined,
+    dateOut: req.body.dateOut,
+    memberShipPeriod: req.body.memberShipPeriod,
+    cow: req.body.cow,
+    locker: req.body.locker,
+    key: req.body.key,
+    lockerFee: req.body.lockerFee,
+    accessKeyFee: req.body.accessKeyFee,
+    monthlyFee: req.body.monthlyFee
   });
   addUserReg.save();
   res.status(201).json({
@@ -71,7 +77,19 @@ router.put('/userReg/edit/:id', (req, res, next) => {
       altphone: req.body.altphone,
       idType: req.body.idType,
       idNumber: req.body.idNumber,
-      company: req.body.company
+      company: req.body.company,
+      userName: req.body.userName,
+      password: req.body.password,
+      roles: req.body.roles,
+      dateJoined: req.body.dateJoined,
+      dateOut: req.body.dateOut,
+      memberShipPeriod: req.body.memberShipPeriod,
+      cow: req.body.cow,
+      locker: req.body.locker,
+      key: req.body.key,
+      lockerFee: req.body.lockerFee,
+      accessKeyFee: req.body.accessKeyFee,
+      monthlyFee: req.body.monthlyFee
     };
 
     UserReg.findByIdAndUpdate(req.params.id, { $set: edit }, {new: true}, (err, data) => {
@@ -95,25 +113,9 @@ router.put('/userReg/edit/:id', (req, res, next) => {
              res.send(data);
     }) 
  });
+;
 
 
-/* END OF Routes and Endpoints for UserReg */
-
-
-
-
-
-/* Routes and Endpoints for Admin */
-
-
-
-/* END OF Routes and Endpoints for Admin */
-
-
-
-
-=======
->>>>>>> development
 
 
 
