@@ -31,7 +31,7 @@ const Branding = mongoose.model('Branding');
 //Routes and Endpoints for Assets
 
 //Get all assets
-router.get('', (req, res, next) => {
+router.get('/assets', (req, res, next) => {
   Assets.find((err, data) => {
     if (err) {
       res.send(err)

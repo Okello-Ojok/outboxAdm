@@ -8,13 +8,23 @@ const UserInfo = mongoose.model('UserInfo');
 const Admin = mongoose.model('Admin');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/users', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 
 /* Routes and Endpoints for UserReg */
 
+//get userRegInfo
+router.get('/userReg', (req, res, next) => {
+  UserReg.find((err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json(data);
+    }
+  });
+});
 
 
 /* END OF Routes and Endpoints for UserReg */
