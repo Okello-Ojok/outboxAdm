@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 
 
 const UserReg = mongoose.model('UserReg');
-const UserInfo = mongoose.model('UserInfo');
-const Admin = mongoose.model('Admin');
+
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
@@ -13,6 +12,7 @@ router.get('/users', function(req, res, next) {
 });
 
 
+<<<<<<< HEAD
 /* Routes and Endpoints for UserReg */
 
 //get userRegInfo
@@ -112,12 +112,12 @@ router.put('/userReg/edit/:id', (req, res, next) => {
 
 
 
+=======
+>>>>>>> development
 
-/* Routes and Endpoints for UserInfo */
 
 
 
-/* END OF Routes and Endpoints for UserInfo */
 
 
 
