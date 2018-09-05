@@ -27,9 +27,9 @@ router.get('/userReg', (req, res, next) => {
 });
 
 //Add userRegInfo
+
 router.post('/userReg/add', (req, res, next) => {
   const addUserReg = new UserReg({
-
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     gender: req.body.gender,
@@ -39,19 +39,12 @@ router.post('/userReg/add', (req, res, next) => {
     idType: req.body.idType,
     idNumber: req.body.idNumber,
     company: req.body.company
-
   });
-
-  addUserReg.save((err, data) => {
-    if (err) {
-      res.send("Failed to add user reg info");
-    } else {
-      res.send("User successfully added");
-    }
+  addUserReg.save();
+  res.status(201).json({
+    message: "success"
   });
-
 });
-
 
 /* END OF Routes and Endpoints for UserReg */
 
