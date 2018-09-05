@@ -107,6 +107,22 @@ router.put('/edit/:id', (req, res, next) => {
 // END OF Routes and Endpoints for Assets
 
 //Delete assets
+router.delete('/:id', (req, res, next) => {
+  if (!(req.params && req.params.id)) {
+    res.status(400).json({'message': 'Bad request'});
+  } else {
+    Assets.findByIdAndRemove(req.params.id, (err, data) => {
+      if (data) {
+        res.status(200).json('Asset successfully deleted');
+      } else {
+        res.send(err);
+      }
+    })
+  }
+})
+
+
+
 
 
 module.exports = router;
