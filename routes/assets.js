@@ -41,7 +41,7 @@ router.get('', (req, res, next) => {
   
   
   //Add asset
-  router.post('', (req, res, next) => {
+  router.post('/assets', (req, res, next) => {
     let addAsset = new Assets({
   
       tagNumber: req.body.tagNumber,
@@ -71,7 +71,7 @@ router.get('', (req, res, next) => {
   
   
   //Update asset
-  router.put('/:id', (req, res, next) => {
+  router.put('/edit/:id', (req, res, next) => {
     if (!(req.params && req.params.id)) {
       res.status(404).send("Invalid ID");
     } else {
@@ -89,6 +89,13 @@ router.get('', (req, res, next) => {
         dateOfPurchase: req.body.dateOfPurchase,
         purchasePrice: req.body.purchasePrice
       };
+      Assets.findByIdAndUpdate(req.params.id, { $set: edit }, { new: true}, (err, data) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json(data);
+        }
+      })
       
     }
   })

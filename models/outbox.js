@@ -150,7 +150,7 @@ var assetSchema = new mongoose.Schema({
         type: String, required: true
     },
     dateOfPurchase: {
-        type: Date, required: true
+        type: Date
     },
     purchasePrice: {
         type: Number, required: true
