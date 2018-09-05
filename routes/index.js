@@ -116,6 +116,8 @@ router.put('/:id', (req, res, next) => {
 })
 
 
+// END OF Routes and Endpoints for Assets
+
 
 
 
@@ -126,6 +128,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Branding
 
 
 
@@ -135,6 +138,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Consumption
 
 
 
@@ -144,6 +148,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Events
 
 
 
@@ -153,6 +158,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Utilities
 
 
 
@@ -162,6 +168,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Payments
 
 
 
@@ -171,6 +178,7 @@ router.put('/:id', (req, res, next) => {
 
 
 
+// END OF Routes and Endpoints for Services
 
 
 
