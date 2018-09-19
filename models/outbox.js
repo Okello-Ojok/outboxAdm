@@ -4,55 +4,49 @@ var mongoose = require('mongoose');
 
 var registrationSchema = new mongoose.Schema({
 
+    // _id: mongoose.Schema.Types.ObjectId,
+
     firstname: {
-        type: String,
-        required: true
+        type: String
     },
     lastname: {
-        type: String,
-        required: true
+        type: String
     },
     gender: {
         type: String,
-        enum: ["male", "female"],
-        required: true
+        enum: ["male", "female"]
     },
     email: {
-        type: String,
-        required: true
+        type: String
     },
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     altphone: {
-        type: String,
-        required: true
+        type: String
     },
     idType: {
-        type: String,
-        required: true
+        type: String
     },
     idNumber: {
-        type: String,
-        required: true
+        type: String
     },
     company: {
-        type: String,
-        required: true
+        type: String
     },
     userName: {
-        type: String,
-        required: true
+        type: String
     },
     password: {
+        type: String
+    },
+    occupation: {
         type: String,
-        required: true
+        enum: ["Student", "Proffessional", "Other"]
     },
 
     roles: {
-        type: String,
-        required: true
+        type: String
     },
     dateJoined: {
         type: Date
@@ -84,6 +78,7 @@ var registrationSchema = new mongoose.Schema({
     monthlyFee: {
         type: Number
     }
+    
 
 });
 
@@ -124,22 +119,39 @@ var utilitySchema = new mongoose.Schema({
 
 var eventSchema = new mongoose.Schema({
 
+    // _id: mongoose.Schema.Types.ObjectId,
+
     eventname: {
         type: String,
         required: true
     },
     eventDate: {
         type: Date,
-        required: true
+        default: Date.now
+        // required: true
     },
-    eventTime: {
+    // eventTime: {
+    //     type: String,
+    //     required: true
+    // },
+    // speakerId: {
+    //     type: String,
+    //     required: true
+    // },
+    eventPaid: {
         type: String,
-        required: true
+        enum: ["Yes", "No"]
     },
-    speakerId: {
+    attendee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserReg'
+    },
+
+    attendedEvent: {
         type: String,
-        required: true
+        enum: ["Yes", "No"]
     }
+
 
 });
 
