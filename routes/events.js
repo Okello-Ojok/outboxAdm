@@ -108,8 +108,9 @@ router.get('/all/:get', async (req, res, next) => {
   try {
     const events = await Events
     .find()
-    .populate('attendee')
-    .select('eventname attendee');
+    .populate('attendee', 'firstname')
+    .select('eventname eventDate eventPaid attendee');
+    console.log(events)
     res.send(events)
   } catch(err) {
     next(err)
