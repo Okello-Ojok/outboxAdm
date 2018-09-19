@@ -104,7 +104,7 @@ router.post('/attendee', (req, res, next) => {
 
 // getAll();
 
-router.get('/all/:id', async (req, res, next) => {
+router.get('/all/:get', async (req, res, next) => {
   try {
     const events = await Events
     .find()
