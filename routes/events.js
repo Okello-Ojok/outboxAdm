@@ -38,7 +38,7 @@ router.get('/:id', (req, res, next) => {
   }
 });
 
-
+// Add event
 
 router.post('/add-event', (req, res, next) => {
   let event = new Events({
@@ -69,13 +69,10 @@ router.post('/attendee', (req, res, next) => {
     email: req.body.email,
     phone: req.body.phone,
     company: req.body.company
-    // attendee: req.body.attendee
-    // event: req.body.event
-    // event: addEvent._id
   });
   addAttendee.save((err, data) => {
     if (err) {
-      res.send("Failed to add asset");
+      res.send("Failed to add attendee");
       console.log(err.message);
 
     } else {
@@ -87,10 +84,6 @@ router.post('/attendee', (req, res, next) => {
 
 
 });
-
-
-
-
 
 
 
@@ -107,37 +100,15 @@ router.post('/attendee', (req, res, next) => {
 router.get('/all/:get', async (req, res, next) => {
   try {
     const events = await Events
-    .find()
-    .populate('attendee', 'firstname')
-    .select('eventname eventDate eventPaid attendee');
+      .find()
+      .populate('attendee')
+      .select('eventname eventDate eventPaid attendee');
     console.log(events)
     res.send(events)
-  } catch(err) {
+  } catch (err) {
     next(err)
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
