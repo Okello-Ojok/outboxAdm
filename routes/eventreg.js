@@ -42,14 +42,15 @@ router.post('/create-event', (req, res, next) => {
 
     eventname: req.body.eventname,
     eventDate: req.body.eventDate,
-    eventPaid: req.body.eventPaid
+    eventPaid: req.body.eventPaid,
+    facilitators: req.body.facilitators
     //attendee: req.body.attendee
   })
   event.save((err, data) => {
     if (err) {
       res.send(err)
     } else {
-      res.send("Event successfully addd");
+      res.send("Event successfully added");
     }
   })
 })

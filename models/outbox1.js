@@ -154,6 +154,9 @@ var eventSchema = new mongoose.Schema({
     attendedEvent: {
         type: String,
         enum: ["Yes", "No"]
+    },
+    facilitators: {
+        type: String
     }
 
 
