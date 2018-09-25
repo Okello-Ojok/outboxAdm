@@ -16,37 +16,34 @@ router.get('', (req, res, next) => {
       res.send(err)
     } else {
       res.json(data);
+      console.log(data)
     }
   });
 });
 
 
 
-
-//Get event by id
-router.get('/:id', (req, res, next) => {
-  if (req.params && req.params.id) {
-    Events.findById(req.params.id, (err, data) => {
-      if (data) {
-        res.json(data);
-      } else {
-        res.send(err)
-      }
-    })
-  } else {
-    res.send("ID not found");
-  }
+router.get("/:id", (req, res, next) => {
+  Events.findById(req.params.id).then(data => {
+    if (data) {
+      res.status(200).json(data);
+    } else {
+      res.status(404).json({ message: "Event not found!" });
+    }
+  });
 });
+
+
 
 // Add event
 
-router.post('/add-event', (req, res, next) => {
+router.post('/create-event', (req, res, next) => {
   let event = new Events({
 
     eventname: req.body.eventname,
     eventDate: req.body.eventDate,
-    eventPaid: req.body.eventPaid,
-    attendee: req.body.attendee
+    eventPaid: req.body.eventPaid
+    //attendee: req.body.attendee
   })
   event.save((err, data) => {
     if (err) {
@@ -59,7 +56,7 @@ router.post('/add-event', (req, res, next) => {
 
 
 
-router.post('/attendee', (req, res, next) => {
+router.post('/event-attendee', (req, res, next) => {
 
 
   let addAttendee = new UserReg({
@@ -68,8 +65,8 @@ router.post('/attendee', (req, res, next) => {
     lastname: req.body.lastname,
     email: req.body.email,
     phone: req.body.phone,
-    company: req.body.company
-    //event: req.body.event
+    company: req.body.company,
+    eventAtt: req.body.eventAtt
   });
   addAttendee.save((err, data) => {
     if (err) {
@@ -88,32 +85,20 @@ router.post('/attendee', (req, res, next) => {
 
 
 
-// async function getAll(){
-//   const events = await Events
-//     .find()
-//     .populate('attendee', 'eventname -_id')
-//     .select('eventname attendee');
-//     console.log(events);
-// }
-
-// getAll();
-
-
-
-
-
 router.get('/all/:get', async (req, res, next) => {
   try {
-    const events = await Events
+    const events = await UserReg
       .find()
-      .populate('attendee')
-      .select('eventname eventDate eventPaid attendee');
+      .populate('eventAtt')
+      .select('firstname lastname eventAtt');
     console.log(events)
     res.send(events)
   } catch (err) {
     next(err)
   }
 })
+
+
 
 
 
@@ -169,6 +154,84 @@ router.delete('/:id', (req, res, next) => {
     })
   }
 })
+
+
+
+
+
+// router.get('/all/:id', async (req, res, next) => {
+//   if (req.params && req.params.id) {
+//     try {
+//       const events = await Events
+//       .findById(req.params.id, (err, data) => {
+//         if (data) {
+//           res.json(data);
+//         } else {
+//           res.send(err)
+//         }
+//       })
+//       .populate('attendee')
+//       .select('firstname lastname attendee')
+//       res.send(events)
+//     } catch (error) {
+//       next(error)
+//     }
+//   }
+//   else {
+//        res.send("ID not found");
+//      }
+// })
+
+
+
+
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     if (req.params && req.params.id) {
+//       const events = await Events
+//       .findById(req.params.id, (err, data) => {
+//         if (data) {
+//           res.json(data);
+//         } else {
+//           res.send(err)
+//         }
+//       })
+//       .populate('attendee')
+//       .select('firstname lastname attendee')
+//       res.send(events)
+//     } else {
+//       res.send("ID not found");
+//     }
+//   } catch (error) {
+//     next(error)
+//   }
+  // if (req.params && req.params.id) {
+  //   Events.findById(req.params.id, (err, data) => {
+  //     if (data) {
+  //       res.json(data);
+  //     } else {
+  //       res.send(err)
+  //     }
+  //   })
+  // } else {
+  //   res.send("ID not found");
+  // }
+//});
+
+//Get event by id
+// router.get('/:id', (req, res, next) => {
+//   if (req.params && req.params.id) {
+//     Events.findById(req.params.id, (err, data) => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.send(err)
+//       }
+//     })
+//   } else {
+//     res.send("ID not found");
+//   }
+// });
 
 
 
