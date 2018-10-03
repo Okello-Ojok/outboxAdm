@@ -12,21 +12,21 @@ const Events = mongoose.model('Events');
 // Add event
 
 router.post('/create-event', (req, res, next) => {
-  let event = new Events({
-    // _id: mongoose.Types.ObjectId(),
-    eventname: req.body.eventname,
-    eventDate: req.body.eventDate,
-    eventPaid: req.body.eventPaid,
-    facilitators: req.body.facilitators
-    //attendee: req.body.attendee
-  })
-  event.save((err, data) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.send("Event successfully added");
-    }
-  })
+    let event = new Events({
+        // _id: mongoose.Types.ObjectId(),
+        eventname: req.body.eventname,
+        eventDate: req.body.eventDate,
+        eventPaid: req.body.eventPaid,
+        facilitators: req.body.facilitators,
+        attendee: req.body.attendee
+    })
+    event.save((err, data) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send("Event successfully added");
+        }
+    })
 })
 
 
@@ -34,26 +34,26 @@ router.post('/create-event', (req, res, next) => {
 router.post('/event-attendee', (req, res, next) => {
 
 
-  let addAttendee = new UserReg({
+    let addAttendee = new UserReg({
 
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    phone: req.body.phone,
-    company: req.body.company,
-    eventAtt: req.body.eventAtt
-  });
-  addAttendee.save((err, data) => {
-    if (err) {
-      res.send("Failed to add attendee");
-      console.log(err.message);
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        phone: req.body.phone,
+        company: req.body.company,
+        eventAtt: req.body.eventAtt
+    });
+    addAttendee.save((err, data) => {
+        if (err) {
+            res.send("Failed to add attendee");
+            console.log(err.message);
 
-    } else {
-      res.send("Attendee successfully added");
-      console.log(data);
+        } else {
+            res.send("Attendee successfully added");
+            console.log(data);
 
-    }
-  });
+        }
+    });
 
 
 });
@@ -62,56 +62,80 @@ router.post('/event-attendee', (req, res, next) => {
 
 //Update events
 router.put('/edit-event/:id', (req, res, next) => {
-  if (!(req.params && req.params.id)) {
-    res.status(404).send("Invalid ID");
-  } else {
-    let edit = {
-      eventname: req.body.eventname,
-      eventDate: req.body.eventDate,
-      eventPaid: req.body.eventPaid,
-      facilitators: req.body.facilitators
-    };
-    Events.findByIdAndUpdate(req.params.id, {
-      $set: edit
-    }, {
-        new: true
-      }, (err, data) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.json(data);
-        }
-      })
+    if (!(req.params && req.params.id)) {
+        res.status(404).send("Invalid ID");
+    } else {
+        let edit = {
+            eventname: req.body.eventname,
+            eventDate: req.body.eventDate,
+            eventPaid: req.body.eventPaid,
+            facilitators: req.body.facilitators
+        };
+        Events.findByIdAndUpdate(req.params.id, {
+            $set: edit
+        }, {
+                new: true
+            }, (err, data) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(data);
+                }
+            })
 
-  }
+    }
 })
 
 
 
 
-
-//Get all events data
+// Get all events data
 router.get('', (req, res, next) => {
-  Events.find((err, data) => {
-    if (err) {
-      res.send(err)
-    } else {
-      res.json(data);
-      console.log(data)
-    }
-  });
+    Events.find((err, data) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.json(data);
+            console.log(data)
+        }
+    });
 });
 
 
 
-router.get("/:id", (req, res, next) => {
-  Events.findById(req.params.id).then(data => {
-    if (data) {
-      res.status(200).json(data);
-    } else {
-      res.status(404).json({ message: "Event not found!" });
-    }
+// //Get events of first five dates from now
+
+const _eventListProjection = 'eventname eventDate';
+
+  // GET list of public events starting in the future
+  router.get('/five', (req, res) => {
+    Events.find({eventDate: { $gte: new Date() }}, _eventListProjection, (err, events) => {
+      let eventsArr = [];
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (events) {
+        events.forEach(event => {
+          eventsArr.push(event);
+        });
+      }
+      res.send(eventsArr);
+    }).limit(5);
   });
+
+
+
+
+
+
+router.get("/:id", (req, res, next) => {
+    Events.findById(req.params.id).then(data => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({ message: "Event not found!" });
+        }
+    });
 });
 
 
@@ -130,17 +154,17 @@ router.get("/:id", (req, res, next) => {
 // })
 
 router.get('/all/:get', async (req, res, next) => {
-  try {
-    const events = await Events
-      .find()
-      .populate('attendee', 'firstname')
-      // .select('eventname eventDate eventPaid attendee');
-      .select('attendee firstname lastname');
-    console.log(events)
-    res.send(events)
-  } catch (err) {
-    next(err)
-  }
+    try {
+        const events = await Events
+            .find()
+            .populate('attendee', 'firstname')
+            // .select('eventname eventDate eventPaid attendee');
+            .select('attendee firstname lastname');
+        console.log(events)
+        res.send(events)
+    } catch (err) {
+        next(err)
+    }
 })
 
 
@@ -150,19 +174,19 @@ router.get('/all/:get', async (req, res, next) => {
 
 //Delete event
 router.delete('/:id', (req, res, next) => {
-  if (!(req.params && req.params.id)) {
-    res.status(400).json({
-      'message': 'Bad request'
-    });
-  } else {
-    Events.findByIdAndRemove(req.params.id, (err, data) => {
-      if (data) {
-        res.status(200).json('Event successfully deleted');
-      } else {
-        res.send(err);
-      }
-    })
-  }
+    if (!(req.params && req.params.id)) {
+        res.status(400).json({
+            'message': 'Bad request'
+        });
+    } else {
+        Events.findByIdAndRemove(req.params.id, (err, data) => {
+            if (data) {
+                res.status(200).json('Event successfully deleted');
+            } else {
+                res.send(err);
+            }
+        })
+    }
 })
 
 
