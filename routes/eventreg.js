@@ -45,11 +45,11 @@ router.post('/event-attendee', (req, res, next) => {
     });
     addAttendee.save((err, data) => {
         if (err) {
-            res.send("Failed to add attendee");
+            res.send({message: "Failed to add attendee"});
             console.log(err.message);
 
         } else {
-            res.send("Attendee successfully added");
+            res.send({message: "Attendee successfully added"});
             console.log(data);
 
         }
