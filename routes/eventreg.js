@@ -9,7 +9,7 @@ const Events = mongoose.model('Events');
 
 //Routes and Endpoints for Events
 
-// Add event
+// Endpoint to create an event
 
 router.post('/create-event', (req, res, next) => {
     let event = new Events({
@@ -30,7 +30,7 @@ router.post('/create-event', (req, res, next) => {
 })
 
 
-
+// Endpoint to create an attendee
 router.post('/event-attendee', (req, res, next) => {
 
 
@@ -40,16 +40,21 @@ router.post('/event-attendee', (req, res, next) => {
         lastname: req.body.lastname,
         email: req.body.email,
         phone: req.body.phone,
-        company: req.body.company,
+        gender: req.body.gender,
+        occupation: req.body.occupation,
         eventAtt: req.body.eventAtt
     });
     addAttendee.save((err, data) => {
         if (err) {
-            res.send({message: "Failed to add attendee"});
+            res.send({
+                message: "Failed to add attendee"
+            });
             console.log(err.message);
 
         } else {
-            res.send({message: "Attendee successfully added"});
+            res.send({
+                message: "Attendee successfully added"
+            });
             console.log(data);
 
         }
@@ -59,8 +64,51 @@ router.post('/event-attendee', (req, res, next) => {
 });
 
 
+//Endpoint to edit an existing attendee
+router.put('/event-attendee/:id', (req, res, next) => {
+    if (!(req.params && req.params.id)) {
+        res.status(404).send("Invalid ID");
+    } else {
+        let edit = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            phone: req.body.phone,
+            gender: req.body.gender,
+            occupation: req.body.occupation
+        };
+        UserReg.findByIdAndUpdate(req.params.id, {
+            $set: edit
+        }, {
+            new: true
+        }, (err, data) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(data);
+            }
+        })
 
-//Update events
+    }
+})
+
+
+// Endpoint to get event attendees
+router.get('/attendees', (req, res, next) => {
+    UserReg.find((err, data) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.json(data);
+            console.log(data)
+        }
+    });
+});
+
+
+
+
+//Endpoint to Update events
 router.put('/edit-event/:id', (req, res, next) => {
     if (!(req.params && req.params.id)) {
         res.status(404).send("Invalid ID");
@@ -74,14 +122,14 @@ router.put('/edit-event/:id', (req, res, next) => {
         Events.findByIdAndUpdate(req.params.id, {
             $set: edit
         }, {
-                new: true
-            }, (err, data) => {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.json(data);
-                }
-            })
+            new: true
+        }, (err, data) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(data);
+            }
+        })
 
     }
 })
@@ -102,26 +150,70 @@ router.get('', (req, res, next) => {
 });
 
 
+// GET event by event ID
+router.get('/event/:id', (req, res) => {
+    Events.findById(req.params.id, (err, event) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            });
+        }
+        if (!event) {
+            return res.status(400).send({
+                message: 'Event not found.'
+            });
+        }
+        res.send(event);
+    });
+});
 
-// //Get events of first five dates from now
+
+// GET Attendees by event ID
+router.get('/event/:eventId/attendees', (req, res) => {
+    UserReg.find({
+        eventId: req.params.eventId
+    }, (err, attendees) => {
+        let attendeesArr = [];
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            });
+        }
+        if (attendees) {
+            attendees.forEach(attendee => {
+                attendeesArr.push(attendee);
+            });
+        }
+        res.send(attendeesArr);
+    });
+});
+
+
+//Get events of first five dates from now
 
 const _eventListProjection = 'eventname eventDate';
 
-  // GET list of public events starting in the future
-  router.get('/five', (req, res) => {
-    Events.find({eventDate: { $gte: new Date() }}, _eventListProjection, (err, events) => {
-      let eventsArr = [];
-      if (err) {
-        return res.status(500).send({message: err.message});
-      }
-      if (events) {
-        events.forEach(event => {
-          eventsArr.push(event);
-        });
-      }
-      res.send(eventsArr);
+// GET list of public events starting in the future
+router.get('/five', (req, res) => {
+    Events.find({
+        eventDate: {
+            $gte: new Date()
+        }
+    }, _eventListProjection, (err, events) => {
+        let eventsArr = [];
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            });
+        }
+        if (events) {
+            events.forEach(event => {
+                eventsArr.push(event);
+            });
+        }
+        res.send(eventsArr);
     }).limit(5);
-  });
+});
 
 
 
@@ -133,7 +225,9 @@ router.get("/:id", (req, res, next) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: "Event not found!" });
+            res.status(404).json({
+                message: "Event not found!"
+            });
         }
     });
 });
