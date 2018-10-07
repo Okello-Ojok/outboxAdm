@@ -22,9 +22,13 @@ router.post('/create-event', (req, res, next) => {
     })
     event.save((err, data) => {
         if (err) {
-            res.send(err)
+            res.send({
+                message: "Failed to add event"
+            })
         } else {
-            res.send("Event successfully added");
+            res.send({
+                message: "Event successfully added"
+            });
         }
     })
 })
