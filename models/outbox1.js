@@ -79,10 +79,10 @@ var registrationSchema = new mongoose.Schema({
     monthlyFee: {
         type: Number
     },
-    eventAtt: [{
+    eventAtt: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Events'
-    }]
+    }
     
 
 });
@@ -141,10 +141,10 @@ var eventSchema = new mongoose.Schema({
         type: String,
         enum: ["Yes", "No"]
     },
-    attendee: [{
+    attendee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserReg'
-    }],
+    },
 
     attendedEvent: {
         type: String,

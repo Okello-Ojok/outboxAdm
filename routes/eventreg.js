@@ -7,8 +7,6 @@ const UserReg = mongoose.model('UserReg');
 const Events = mongoose.model('Events');
 
 
-//Routes and Endpoints for Events
-
 // Endpoint to create an event
 
 router.post('/create-event', (req, res, next) => {
@@ -173,10 +171,9 @@ router.get('/event/:id', (req, res) => {
 
 
 // GET Attendees by event ID
-router.get('/event/:eventId/attendees', (req, res) => {
-    UserReg.find({
-        eventId: req.params.eventId
-    }, (err, attendees) => {
+router.get('/:eventAtt/attendees', (req, res) => {
+    
+    UserReg.find({eventAtt: req.params.eventAtt}, (err, attendees) => {
         let attendeesArr = [];
         if (err) {
             return res.status(500).send({
@@ -186,16 +183,19 @@ router.get('/event/:eventId/attendees', (req, res) => {
         if (attendees) {
             attendees.forEach(attendee => {
                 attendeesArr.push(attendee);
+                console.log(attendeesArr);
             });
         }
         res.send(attendeesArr);
-    });
+    })
+    //.populate('eventAtt')
+    .select('firstname lastname email phone') ;
 });
 
 
 //Get events of first five dates from now
 
-const _eventListProjection = 'eventname eventDate';
+const eventsProjection = 'eventname eventDate';
 
 // GET list of public events starting in the future
 router.get('/five', (req, res) => {
@@ -203,7 +203,7 @@ router.get('/five', (req, res) => {
         eventDate: {
             $gte: new Date()
         }
-    }, _eventListProjection, (err, events) => {
+    }, eventsProjection, (err, events) => {
         let eventsArr = [];
         if (err) {
             return res.status(500).send({
@@ -218,9 +218,6 @@ router.get('/five', (req, res) => {
         res.send(eventsArr);
     }).limit(5);
 });
-
-
-
 
 
 
@@ -251,18 +248,28 @@ router.get("/:id", (req, res, next) => {
 //   }
 // })
 
-router.get('/all/:get', async (req, res, next) => {
-    try {
-        const events = await Events
-            .find()
-            .populate('attendee', 'firstname')
-            // .select('eventname eventDate eventPaid attendee');
-            .select('attendee firstname lastname');
-        console.log(events)
-        res.send(events)
-    } catch (err) {
-        next(err)
+router.get('/all/:id', async (req, res, next) => {
+    // if ((req.params && req.params.id)){
+
+        try {
+            const events = await Events
+                .find()
+                .populate('attendee')
+                // .select('eventname eventDate eventPaid attendee');
+                .select('attendee firstname lastname');
+            // console.log(events)
+            // res.send(events)
+for (let i=0;i<=events.length;i++)
+{
+    if (req.params.id ===events._id)
+    {
+        console.log(events.attendee.firstname)
     }
+}
+            
+        } catch (err) {
+            next(err)
+        }
 })
 
 
