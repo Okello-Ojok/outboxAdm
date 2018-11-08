@@ -148,7 +148,7 @@ router.get('', (req, res, next) => {
             res.json(data);
             console.log(data)
         }
-    });
+    }).sort('-eventDate');
 });
 
 
@@ -188,8 +188,8 @@ router.get('/:eventAtt/attendees', (req, res) => {
         }
         res.send(attendeesArr);
     })
-    //.populate('eventAtt')
-    .select('firstname lastname email phone') ;
+    // .populate('eventAtt')
+    .select('firstname lastname email gender occupation phone') ;
 });
 
 
@@ -277,50 +277,48 @@ for (let i=0;i<=events.length;i++)
 
 
 
-//Delete event
-router.delete('/:id', (req, res, next) => {
-    if (!(req.params && req.params.id)) {
-        res.status(400).json({
-            'message': 'Bad request'
-        });
-    } else {
-        Events.findByIdAndRemove(req.params.id, (err, data) => {
-            if (data) {
-                res.status(200).json('Event successfully deleted');
-            } else {
-                res.send(err);
-            }
-        })
-    }
-})
-
-
-
-
-
-// router.get('/all/:id', async (req, res, next) => {
-//   if (req.params && req.params.id) {
-//     try {
-//       const events = await Events
-//       .findById(req.params.id, (err, data) => {
-//         if (data) {
-//           res.json(data);
-//         } else {
-//           res.send(err)
-//         }
-//       })
-//       .populate('attendee')
-//       .select('firstname lastname attendee')
-//       res.send(events)
-//     } catch (error) {
-//       next(error)
+//Delete event only and leave attendees
+// router.delete('/:id', (req, res, next) => {
+//     if (!(req.params && req.params.id)) {
+//         res.status(400).json({
+//             'message': 'Bad request'
+//         });
+//     } else {
+//         Events.findByIdAndRemove(req.params.id, (err, data) => {
+//             if (data) {
+//                 res.status(200).json('Event successfully deleted');
+//             } else {
+//                 res.send(err);
+//             }
+//         })
 //     }
-//   }
-//   else {
-//        res.send("ID not found");
-//      }
-// })
+// });
 
+
+// Delete event and all associated attendees
+router.delete('/:id', (req, res) => {
+    Events.findById(req.params.id, (err, event) => {
+        if (err) {
+            return res.status(500).send({message: err.message})
+        }
+        if (!event) {
+            return res.status(400).send({message: 'Event not found'});
+        }
+        UserReg.find({eventAtt: req.params.id}, (err, attendees) => {
+            if (attendees) {
+                attendees.forEach(attendee => {
+                    attendee.remove();
+                });
+            }
+            event.remove(err => {
+                if (err) {
+                    return res.status(500).send({message: err.message});
+                }
+                res.status(200).send({message: 'Event and attendees successfully deleted.'})
+            });
+        });
+    });
+});
 
 
 
@@ -356,21 +354,6 @@ router.delete('/:id', (req, res, next) => {
 //   res.send("ID not found");
 // }
 //});
-
-//Get event by id
-// router.get('/:id', (req, res, next) => {
-//   if (req.params && req.params.id) {
-//     Events.findById(req.params.id, (err, data) => {
-//       if (data) {
-//         res.json(data);
-//       } else {
-//         res.send(err)
-//       }
-//     })
-//   } else {
-//     res.send("ID not found");
-//   }
-// });
 
 
 
