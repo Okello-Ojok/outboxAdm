@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var Schema = mongoose.Schema;
 
 
 
@@ -14,7 +15,7 @@ var registrationSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ["male", "female"]
+        enum: ["Male", "Female"]
     },
     email: {
         type: String
@@ -124,6 +125,7 @@ var utilitySchema = new mongoose.Schema({
 var eventSchema = new mongoose.Schema({
 
     // _id: mongoose.Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
 
     eventname: {
         type: String,
@@ -134,26 +136,22 @@ var eventSchema = new mongoose.Schema({
         default: Date.now
         // required: true
     },
-    // eventTime: {
-    //     type: String,
-    //     required: true
-    // },
-    // speakerId: {
-    //     type: String,
-    //     required: true
-    // },
+    
     eventPaid: {
         type: String,
         enum: ["Yes", "No"]
     },
-    attendee: [{
+    attendee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserReg'
-    }],
+    },
 
     attendedEvent: {
         type: String,
         enum: ["Yes", "No"]
+    },
+    facilitators: {
+        type: String
     }
 
 
