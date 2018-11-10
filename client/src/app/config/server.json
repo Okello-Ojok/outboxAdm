@@ -1,4 +1,5 @@
 {
     "local_server": "http://localhost:3000/api",
-    "live_server": "https://outboxlive.herokuapp.com/api"
+    "live_server": "https://outboxdash.herokuapp.com/api",
+    "back_server": "/api"
 }
