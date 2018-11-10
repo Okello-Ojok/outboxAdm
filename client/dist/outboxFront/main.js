@@ -704,7 +704,7 @@ var ChartsComponent = /** @class */ (function () {
 /*! exports provided: local_server, live_server, default */
 /***/ (function(module) {
 
-module.exports = {"local_server":"/api","live_server":"/api"};
+module.exports = {"local_server":"http://localhost:3000/api","live_server":"https://outboxlive.herokuapp.com/api"};
 
 /***/ }),
 
