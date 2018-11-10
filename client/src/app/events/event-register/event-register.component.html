@@ -1,0 +1,90 @@
+<div class="card">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="title">
+        <h1>Event Registration</h1>
+
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="onAddAttendee(attendeeForm)" #attendeeForm="ngForm">
+
+        <div class="fiveEvents">
+          <h4>Choose Event to register for.</h4>
+          <mat-button-toggle-group name="ourEvents" [ngModel]="ourEvents?.upcoming" #upcoming="ngModel" required>
+            <mat-button-toggle *ngFor="let upcoming of events" [value]="upcoming">{{upcoming.eventname}}</mat-button-toggle>
+
+          </mat-button-toggle-group>
+
+        </div>
+
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="First Name" [ngModel]="attendee?.firstname" name="firstname" #firstname="ngModel"
+                  required>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Last Name" [ngModel]="attendee?.lastname" name="lastname" #lastname="ngModel"
+                  required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Email" [ngModel]="attendee?.email" name="email" #email="ngModel" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Telephone" [ngModel]="attendee?.telephone" name="telephone" #telephone="ngModel"
+                  required>
+              </mat-form-field>
+            </td>
+
+          </tr>
+        </table>
+
+
+
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-select placeholder="Gender" name="gender" [ngModel]="attendee?.sex" #sex="ngModel" required>
+                  <mat-option *ngFor="let sex of gender" [value]="sex">
+                    {{sex}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field>
+                <mat-select placeholder="Occupation" name="occupation" [ngModel]="attendee?.occupation" #occupation="ngModel"
+                  required>
+                  <mat-option *ngFor="let occupation of occupations" [value]="occupation">
+                    {{occupation}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+
+        <button mat-raised-button type="submit" color="primary">Register</button>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>
