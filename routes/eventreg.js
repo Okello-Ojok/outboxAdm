@@ -220,7 +220,7 @@ router.get('/five', (req, res) => {
 });
 
 
-
+// Get event by id
 router.get("/:id", (req, res, next) => {
     Events.findById(req.params.id).then(data => {
         if (data) {
