@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
-
-const UserReg = mongoose.model('UserReg');
-
-
+const UserReg = mongoose.model('Person');
 
 /* Routes and Endpoints for UserReg */
 
@@ -22,34 +21,25 @@ router.get('/userReg', (req, res, next) => {
 
 //Add userRegInfo
 
-router.post('/userReg/add', (req, res, next) => {
+router.post('/userReg/register', (req, res, next) => {
   const addUserReg = new UserReg({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    gender: req.body.gender,
     email: req.body.email,
-    phone: req.body.phone,
-    altphone: req.body.altphone,
-    idType: req.body.idType,
-    idNumber: req.body.idNumber,
-    company: req.body.company,
-    userName: req.body.userName,
-    password: req.body.password,
-    roles: req.body.roles,
-    dateJoined: req.body.dateJoined,
-    dateOut: req.body.dateOut,
-    memberShipPeriod: req.body.memberShipPeriod,
-    cow: req.body.cow,
-    locker: req.body.locker,
-    key: req.body.key,
-    lockerFee: req.body.lockerFee,
-    accessKeyFee: req.body.accessKeyFee,
-    monthlyFee: req.body.monthlyFee
+    password: req.body.password
+    
   });
-  addUserReg.save();
-  res.status(201).json({
-    message: "success"
+  addUserReg.save((err, doc) => {
+    if (!err) {
+      res.send(doc);
+  } else {
+      if (err.code == 11000)
+          res.status(422).send(['Duplicate email adrress found.']);
+      else
+          return next(err);
+  }
   });
+  
 });
 
 //geting user by id
@@ -62,7 +52,18 @@ router.get('/userReg/:id', (req, res, next) => {
   });
 });
 
-//updateing userinfo
+//getting user by name
+// router.get('/userReg/firstname', (req, res, next) => {
+//   var query = Person.findOne({ 'firstname': firstname });
+//   UserReg.find(query, (err, name) => {
+//       if(err)
+//           console.log(err);
+//       else 
+//           res.send(name);
+//   });
+// });
+
+//updating userinfo
 router.put('/userReg/edit/:id', (req, res, next) => {
   //UserReg.findByIdAndUpdate(req.params.id, (err, data) => {
   if (!(req.params && req.params.id)) {
@@ -71,25 +72,8 @@ router.put('/userReg/edit/:id', (req, res, next) => {
     var edit = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      gender: req.body.gender,
       email: req.body.email,
-      phone: req.body.phone,
-      altphone: req.body.altphone,
-      idType: req.body.idType,
-      idNumber: req.body.idNumber,
-      company: req.body.company,
-      userName: req.body.userName,
-      password: req.body.password,
-      roles: req.body.roles,
-      dateJoined: req.body.dateJoined,
-      dateOut: req.body.dateOut,
-      memberShipPeriod: req.body.memberShipPeriod,
-      cow: req.body.cow,
-      locker: req.body.locker,
-      key: req.body.key,
-      lockerFee: req.body.lockerFee,
-      accessKeyFee: req.body.accessKeyFee,
-      monthlyFee: req.body.monthlyFee
+      password: req.body.password
     };
 
     UserReg.findByIdAndUpdate(req.params.id, { $set: edit }, {new: true}, (err, data) => {
@@ -114,14 +98,5 @@ router.put('/userReg/edit/:id', (req, res, next) => {
     }) 
  });
 ;
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

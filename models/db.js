@@ -45,3 +45,4 @@ process.on('SIGTERM', function() {
 //require the Schema file
 //require('./outbox');
 require('./outbox1');
+require('./person');

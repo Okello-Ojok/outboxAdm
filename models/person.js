@@ -1,89 +1,62 @@
 const mongoose = require('mongoose');
-const {eventSchema} = require('./event');
+const bcrypt = require('bcryptjs');
+
+// const {eventSchema} = require('./event');
 
 
 const personSchema = new mongoose.Schema({
 
-    // _id: mongoose.Schema.Types.ObjectId,
 
     firstname: {
-        type: String
+        type: String,
+        required: "FullName can\'t be empty"
     },
     lastname: {
-        type: String
-    },
-    gender: {
         type: String,
-        enum: ["Male", "Female"]
+        required: "FullName can\'t be empty"
     },
     email: {
-        type: String
-    },
-    phone: {
-        type: String
-    },
-    altphone: {
-        type: String
-    },
-    idType: {
-        type: String
-    },
-    idNumber: {
-        type: String
-    },
-    company: {
-        type: String
-    },
-    userName: {
-        type: String
-    },
+        type: String,
+        required: "Email can\'t be empty",
+        unique: true
+    },   
     password: {
-        type: String
+        type: String, 
+        required: 'Password can\'t be empty',
+        minlength: [4, 'Password must be atleast 4 characters long']
     },
-    occupation: {
-        type: String,
-        enum: ["Student", "Proffessional", "Other"]
-    },
-
-    roles: {
-        type: String
-    },
-    dateJoined: {
-        type: Date
-    },
-    dateOut: {
-        type: Date
-    },
-    memberShipPeriod: {
-        type: Number
-    },
-    cow: {
-        type: String,
-        enum: ["Yes", "No"]
-    },
-    locker: {
-        type: String,
-        enum: ["Yes", "No"]
-    },
-    key: {
-        type: String,
-        enum: ["Yes", "No"]
-    },
-    lockerFee: {
-        type: Number
-    },
-    accessKeyFee: {
-        type: Number
-    },
-    monthlyFee: {
-        type: Number
-    },
-    event: {
-        type: eventSchema
-    }
-    
+    saltSecret: String 
 
 });
 
-mongoose.model('Person', personSchema, 'users');
-exports.personSchema = personSchema;
+//email verification
+// Custom validation for email
+personSchema.path('email').validate((val) => {
+    emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(val);
+}, 'Invalid e-mail.');
+
+personSchema.pre('save', function(next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(10, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password along with our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            user.saltSecret = salt;
+            next();
+        });
+    });
+});
+
+module.exports = mongoose.model('Person', personSchema, 'auth');
+// exports.personSchema = {personSchema};
