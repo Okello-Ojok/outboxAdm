@@ -42,6 +42,10 @@ router.post('/userReg/register', (req, res, next) => {
   
 });
 
+router.post('/authenticate', (req, res, next) => {
+
+})
+
 //geting user by id
 router.get('/userReg/:id', (req, res, next) => {
   UserReg.findById(req.params.id, (err, issues) => {
@@ -52,10 +56,20 @@ router.get('/userReg/:id', (req, res, next) => {
   });
 });
 
+//geting user by name
+router.get('/userReg/fn/:fn', (req, res, next) => {
+  UserReg.find({firstname: req.params.fn}, (err, issues) => {
+      if(err)
+          console.log(err);
+      else 
+          res.json(issues);
+  });
+});
+
 //getting user by name
 // router.get('/userReg/firstname', (req, res, next) => {
-//   var query = Person.findOne({ 'firstname': firstname });
-//   UserReg.find(query, (err, name) => {
+//   // var query = { 'firstname': req.params.firstname};
+//   UserReg.findOne({ 'firstname': req.body.firstname }, (err, name) => {
 //       if(err)
 //           console.log(err);
 //       else 
@@ -65,7 +79,6 @@ router.get('/userReg/:id', (req, res, next) => {
 
 //updating userinfo
 router.put('/userReg/edit/:id', (req, res, next) => {
-  //UserReg.findByIdAndUpdate(req.params.id, (err, data) => {
   if (!(req.params && req.params.id)) {
     res.status(404).send("Invalid ID");
   } else {
