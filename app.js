@@ -6,8 +6,9 @@ var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
-require('./models/db');
+require('./config/db');
 
 //var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -45,6 +46,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport') (passport);
 
 //app.use('/', indexRouter);
 app.use('/api/users', usersRouter);

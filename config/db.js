@@ -5,6 +5,10 @@ mongoose.connect(uri, {
   useNewUrlParser: true
 });
 
+module.exports = {
+  'secret': 'outboxsecretkey',
+};
+
 //Listen to mongoose events
 
 mongoose.connection.on('connected', function() {
@@ -44,5 +48,5 @@ process.on('SIGTERM', function() {
 
 //require the Schema file
 //require('./outbox');
-require('./outbox1');
-require('./person');
+require('../models/outbox1');
+require('../models/person');
