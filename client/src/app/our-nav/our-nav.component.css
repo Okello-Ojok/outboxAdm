@@ -25,9 +25,10 @@
   justify-content: space-around;
 }
 .front .mat-card{
-  width: 180px;
-  height: 60px;
+  /* width: 180px; */
+  height: 100px;
   margin-top: 20px;
+  margin-bottom: 70px;
 }
 .material-icons[_ngcontent-c1] {
   padding-right: 10px;

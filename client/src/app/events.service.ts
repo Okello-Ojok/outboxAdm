@@ -61,7 +61,7 @@ export class EventsService {
 
   getEvent(id: string) {
     return this.http.get<{ _id: string; eventname: string; eventDate: Date; eventPaid: string; facilitators: string }>(
-      "http://localhost:3000/eventreg/edit-event/" + id
+      addr + "/eventreg/edit-event/" + id
     );
   }
 
@@ -70,7 +70,7 @@ export class EventsService {
   // GET an event by ID
   getEventById(id: string): Observable<Event> {
     return this.http
-      .get<Event>("http://localhost:3000/eventreg/event/" + id)
+      .get<Event>(addr + "/eventreg/event/" + id)
       .pipe(catchError((error, caught) => {
         console.log('Error Occurred');
         console.log(error);
@@ -101,7 +101,7 @@ export class EventsService {
     };
     this.http
       .post<{ message: string; eventId: string }>(
-        "http://localhost:3000/eventreg/create-event/", event)
+        addr + "/eventreg/create-event/", event)
       .subscribe(responseData => {
         const id = responseData.eventId;
         event.id = id;
@@ -121,7 +121,7 @@ export class EventsService {
       facilitators: facilitators
     };
     this.http
-      .put("http://localhost:3000/eventreg/edit-event/" + id, event)
+      .put(addr + "/eventreg/edit-event/" + id, event)
       .subscribe(response => {
         const updatedEvents = [...this.events];
         const oldEventIndex = updatedEvents.findIndex(e => e.id === event.id);
@@ -147,7 +147,7 @@ export class EventsService {
     };
     this.http
       .post<{ message: string; attendeeId: string }>(
-        "http://localhost:3000/eventreg/event-attendee/", attendee)
+        addr + "/eventreg/event-attendee/", attendee)
       .subscribe(responseData => {
         const id = responseData.attendeeId;
         attendee.id = id;
@@ -173,7 +173,7 @@ export class EventsService {
 
     };
     this.http
-      .put("http://localhost:3000/eventreg/event-attendee/" + id, attendee)
+      .put(addr + "/eventreg/event-attendee/" + id, attendee)
       .subscribe(response => {
         const updatedAttendees = [...this.attendees];
         const oldAttendeeIndex = updatedAttendees.findIndex(e => e.id === attendee.id);
@@ -187,7 +187,7 @@ export class EventsService {
 
   getAttendee(id: string) {
     return this.http.get<Attendee>(
-      "http://localhost:3000/eventreg/event-attendee/" + id);
+      addr + "/eventreg/event-attendee/" + id);
   }
 
 
@@ -195,7 +195,7 @@ export class EventsService {
 
   // DELETE Event and associated attendees
   deleteEvent(id: string) {
-    return this.http.delete("http://localhost:3000/eventreg/" + id)
+    return this.http.delete(addr + "/eventreg/" + id)
       // .subscribe(() => {
       //   const updatedEvents = this.events.filter(event => event.id !== id)
       //   this.events = updatedEvents

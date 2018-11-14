@@ -14,7 +14,7 @@
       <a mat-list-item routerLink="/attend" routerLinkActive="active">
         <mat-icon>
           <i class="material-icons">
-              account_circle
+            account_circle
           </i>
         </mat-icon>
         Attend Event
@@ -51,7 +51,7 @@
         </mat-icon>
         Housekeeping
       </a>
-      
+
       <a mat-list-item href="/assets">
         <mat-icon>
           <i class="material-icons">
@@ -80,7 +80,30 @@
     </mat-toolbar>
     <!-- Add Content Here -->
 
-    <div class="front flex-container">
+    <!-- Using bootstarp grid -->
+    <div class="container front">
+      <div class="row">
+        <div class="col-md-4">
+            <mat-card class="card1">
+                <mat-icon>
+                  <i class="material-icons">
+                    event
+                  </i>
+                </mat-icon>
+                Events Created
+              </mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="card2">Event Attendees</mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="3">New Clients</mat-card>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="front flex-container">
       <mat-card>
         <mat-icon>
           <i class="material-icons">
@@ -90,15 +113,16 @@
         Residency Inquiries
       </mat-card>
       <mat-card>
-          <mat-icon>
-              <i class="material-icons">
-                event
-              </i>
-            </mat-icon>
-        Events Created</mat-card>
+        <mat-icon>
+          <i class="material-icons">
+            event
+          </i>
+        </mat-icon>
+        Events Created
+      </mat-card>
       <mat-card>Event Attendees</mat-card>
       <mat-card>New Clients</mat-card>
-    </div>
+    </div> -->
     <router-outlet></router-outlet>
 
   </mat-sidenav-content>

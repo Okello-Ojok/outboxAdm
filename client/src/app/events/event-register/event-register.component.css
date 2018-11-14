@@ -1,12 +1,8 @@
-.login-card {
-    max-width: 600px;
-    /* height: 400px; */
-    margin: 3rem auto;
-  }
+
   .login-card td{
       padding: 0 10px;
   }
-  
+
   .mat-card-header{
       text-align: center;
   }
@@ -18,21 +14,211 @@
     margin-bottom: 20px;
 }
   .mat-button-toggle-group{
-      width: 100% !important;
+      width: 100% !important;    
   }
-  /* .mat-button-toggle{
-      width: 200px;
-      height: 75px;
-  } */
   
   .mat-button-toggle{
-    width: 200px;
-    height: 75px;
+    width: 100%;
+    height: 95px;
     /* border: 2px solid #e0e0e0; */
     margin: 5px; 
+    border: 1px solid white;
+    color: white;
+    border-radius: 50px;
+    background: #0087D9;
 }
 
- .mat-button-toggle:hover {
-  background-color:#f5f5f5;
+.mat-button-toggle-checked {
+    background-color: white;
+    color: #0087D9 !important;
+    border: 1px solid #0087D9;
+}
+
+.mat-button-toggle-checked .post-submitted-info{
+    /* background-color: white; */
+    color: #0087D9 !important;
+    /* border: 1px solid #0087D9; */
+}
+
+
+.mat-button-toggle:hover {
+  background-color: white;
+  color: #0087D9;
+  border: 1px solid #0087D9;
+  background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 } 
-  
+
+.mat-button-toggle:hover .post-submitted-info{
+    /* background-color: white; */
+    color: #0087D9;
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+
+/* #social li:hover a, #social li:hover .fa{
+    color: #0087D9;
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+} */
+
+.mat-button-toggle-label-content {
+    line-height: 20px !important;
+}
+
+.eventStyle span{
+    padding: 0px;
+    display: block;
+    padding-top: 5px;
+}
+/* .eventStyle .month, .eventStyle .year {
+    font-size: 14px;
+    text-transform: uppercase;
+} */
+
+.post-submitted-info {
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    top: 0;
+    left: 0;
+    color: white;
+}
+/* .post-submitted-info:hover{
+    color: #0087D9;
+} */
+
+/* .submitted-date {
+    margin-top: 12px;
+} */
+.submitted-date {
+    margin: 10px 0 0 0;
+    /* border-right: 1px solid #c2c2c2; */
+    padding-bottom: 10px;
+}
+
+.submitted-info {
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    top: 0;
+    left: 0;
+}
+
+.post-submitted-info .month, .post-submitted-info .year {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.post-submitted-info .month {
+    margin-top: -1px;
+}
+
+.post-submitted-info .day {
+    font-size: 25px;
+    font-weight: 900;
+    margin-bottom: 2px;
+}
+
+.post-submitted-info .year {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+
+/* .attendereg{
+    margin-top: 20px;
+} */
+/* fontawesome */
+.fa {
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+  .fa:hover {
+    opacity: 0.7;
+  }
+
+#sociallinks{
+    background: #0087D9;
+    color: white;
+}
+
+#sociallinks ul{
+    list-style: none;
+    padding-left: 0;  
+    
+}
+
+/* #sociallinks ul li{
+    border-top: 2px solid red;
+    
+} */
+#social li{
+    border: 1px solid white;
+    border-radius: 50px;
+    margin-top: 10px;
+    text-align: center;
+    /* background: white; */
+}
+
+
+#sociallinks i{
+    margin: 10px;
+}
+
+#sociallinks a{
+    text-decoration: none;
+    /* padding-bottom: 15px; */
+    color: white;
+}
+
+
+
+#social li {
+    background: #0087D9;
+    cursor: pointer;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+#social li:hover {
+    background: white;
+    color: #0087D9;
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+#social li:hover a, #social li:hover .fa{
+    /* background: white; */
+    color: #0087D9;
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+
+
+
+#social li:focus {
+    outline: none;
+}
+

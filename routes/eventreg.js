@@ -10,6 +10,7 @@ const Events = mongoose.model('Events');
 // Endpoint to create an event
 
 router.post('/create-event', (req, res, next) => {
+
     let event = new Events({
         // _id: mongoose.Types.ObjectId(),
         eventname: req.body.eventname,
@@ -18,6 +19,12 @@ router.post('/create-event', (req, res, next) => {
         facilitators: req.body.facilitators,
         attendee: req.body.attendee
     })
+    
+    let newDate = new Date(event.eventDate)
+    newDate.setMinutes(newDate.getMinutes() + newDate.getTimezoneOffset() * -1);
+    event.eventDate = newDate;
+    
+
     event.save((err, data) => {
         if (err) {
             res.send({
@@ -30,6 +37,172 @@ router.post('/create-event', (req, res, next) => {
         }
     })
 })
+
+
+//Endpoint to Update events
+router.put('/edit-event/:id', (req, res, next) => {
+    if (!(req.params && req.params.id)) {
+        res.status(404).send("Invalid ID");
+    } else {
+        let edit = {
+            eventname: req.body.eventname,
+            eventDate: req.body.eventDate,
+            eventPaid: req.body.eventPaid,
+            facilitators: req.body.facilitators
+        };
+        Events.findByIdAndUpdate(req.params.id, {
+            $set: edit
+        }, {
+            new: true
+        }, (err, data) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(data);
+            }
+        })
+
+    }
+})
+
+// Get all events data
+router.get('', (req, res, next) => {
+    Events.find((err, data) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.json(data);
+            console.log(data)
+        }
+    }).sort('eventDate');
+});
+
+
+
+//Get events of first five dates from now
+
+const eventsProjection = 'eventname eventDate';
+
+// GET list of public events starting in the future
+router.get('/five', (req, res) => {
+    Events.find({
+        eventDate: {
+            $gte: new Date()
+        }
+    }, eventsProjection, (err, events) => {
+        let eventsArr = [];
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            });
+        }
+        if (events) {
+            events.forEach(event => {
+                eventsArr.push(event);
+            });
+        }
+        res.send(eventsArr);
+    }).sort('eventDate').limit(5);
+});
+
+
+// Count all events created
+router.get('/countevents', (req, res, next) => {
+    Events.countDocuments({}, (err, total) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            })
+        }
+        if (total) {
+            console.log(total)
+            res.send((total).toString())
+            
+        }
+    } )
+    
+})
+
+
+//Delete event only and leave attendees
+// router.delete('/:id', (req, res, next) => {
+//     if (!(req.params && req.params.id)) {
+//         res.status(400).json({
+//             'message': 'Bad request'
+//         });
+//     } else {
+//         Events.findByIdAndRemove(req.params.id, (err, data) => {
+//             if (data) {
+//                 res.status(200).json('Event successfully deleted');
+//             } else {
+//                 res.send(err);
+//             }
+//         })
+//     }
+// });
+
+
+// Delete event and all associated attendees
+router.delete('/:id', (req, res) => {
+    Events.findById(req.params.id, (err, event) => {
+        if (err) {
+            return res.status(500).send({message: err.message})
+        }
+        if (!event) {
+            return res.status(400).send({message: 'Event not found'});
+        }
+        UserReg.find({eventAtt: req.params.id}, (err, attendees) => {
+            if (attendees) {
+                attendees.forEach(attendee => {
+                    attendee.remove();
+                });
+            }
+            event.remove(err => {
+                if (err) {
+                    return res.status(500).send({message: err.message});
+                }
+                res.status(200).send({message: 'Event and attendees successfully deleted.'})
+            });
+        });
+    });
+});
+
+
+
+// Get event by id
+router.get("/:id", (req, res, next) => {
+    Events.findById(req.params.id).then(data => {
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({
+                message: "Event not found!"
+            });
+        }
+    });
+});
+
+
+
+
+// GET event by event ID
+router.get('/event/:id', (req, res) => {
+    Events.findById(req.params.id, (err, event) => {
+        if (err) {
+            return res.status(500).send({
+                message: err.message
+            });
+        }
+        if (!event) {
+            return res.status(400).send({
+                message: 'Event not found.'
+            });
+        }
+        res.send(event);
+    });
+});
+
+
 
 
 // Endpoint to create an attendee
@@ -61,7 +234,6 @@ router.post('/event-attendee', (req, res, next) => {
 
         }
     });
-
 
 });
 
@@ -107,67 +279,15 @@ router.get('/attendees', (req, res, next) => {
     });
 });
 
-
-
-
-//Endpoint to Update events
-router.put('/edit-event/:id', (req, res, next) => {
-    if (!(req.params && req.params.id)) {
-        res.status(404).send("Invalid ID");
-    } else {
-        let edit = {
-            eventname: req.body.eventname,
-            eventDate: req.body.eventDate,
-            eventPaid: req.body.eventPaid,
-            facilitators: req.body.facilitators
-        };
-        Events.findByIdAndUpdate(req.params.id, {
-            $set: edit
-        }, {
-            new: true
-        }, (err, data) => {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(data);
-            }
-        })
-
-    }
-})
-
-
-
-
-// Get all events data
-router.get('', (req, res, next) => {
-    Events.find((err, data) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(data);
-            console.log(data)
-        }
-    }).sort('-eventDate');
+// Endpoint to count all event attendees
+router.get('/count-attendees', (req, res, next) => {
+    UserReg.find().count();
 });
 
 
-// GET event by event ID
-router.get('/event/:id', (req, res) => {
-    Events.findById(req.params.id, (err, event) => {
-        if (err) {
-            return res.status(500).send({
-                message: err.message
-            });
-        }
-        if (!event) {
-            return res.status(400).send({
-                message: 'Event not found.'
-            });
-        }
-        res.send(event);
-    });
-});
+
+
+
 
 
 // GET Attendees by event ID
@@ -193,132 +313,16 @@ router.get('/:eventAtt/attendees', (req, res) => {
 });
 
 
-//Get events of first five dates from now
-
-const eventsProjection = 'eventname eventDate';
-
-// GET list of public events starting in the future
-router.get('/five', (req, res) => {
-    Events.find({
-        eventDate: {
-            $gte: new Date()
-        }
-    }, eventsProjection, (err, events) => {
-        let eventsArr = [];
-        if (err) {
-            return res.status(500).send({
-                message: err.message
-            });
-        }
-        if (events) {
-            events.forEach(event => {
-                eventsArr.push(event);
-            });
-        }
-        res.send(eventsArr);
-    }).limit(5);
-});
-
-
-// Get event by id
-router.get("/:id", (req, res, next) => {
-    Events.findById(req.params.id).then(data => {
-        if (data) {
-            res.status(200).json(data);
-        } else {
-            res.status(404).json({
-                message: "Event not found!"
-            });
-        }
-    });
-});
-
-
-
-// router.get('/all/:get', async (req, res, next) => {
-//   try {
-//     const events = await UserReg
-//       .find()
-//       .populate('eventAtt')
-//       .select('firstname lastname eventAtt');
-//     console.log(events)
-//     res.send(events)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-router.get('/all/:id', async (req, res, next) => {
-    // if ((req.params && req.params.id)){
-
-        try {
-            const events = await Events
-                .find()
-                .populate('attendee')
-                // .select('eventname eventDate eventPaid attendee');
-                .select('attendee firstname lastname');
-            // console.log(events)
-            // res.send(events)
-for (let i=0;i<=events.length;i++)
-{
-    if (req.params.id ===events._id)
-    {
-        console.log(events.attendee.firstname)
-    }
-}
-            
-        } catch (err) {
-            next(err)
-        }
-})
+// Check event date if it exists
 
 
 
 
 
 
-//Delete event only and leave attendees
-// router.delete('/:id', (req, res, next) => {
-//     if (!(req.params && req.params.id)) {
-//         res.status(400).json({
-//             'message': 'Bad request'
-//         });
-//     } else {
-//         Events.findByIdAndRemove(req.params.id, (err, data) => {
-//             if (data) {
-//                 res.status(200).json('Event successfully deleted');
-//             } else {
-//                 res.send(err);
-//             }
-//         })
-//     }
-// });
 
 
-// Delete event and all associated attendees
-router.delete('/:id', (req, res) => {
-    Events.findById(req.params.id, (err, event) => {
-        if (err) {
-            return res.status(500).send({message: err.message})
-        }
-        if (!event) {
-            return res.status(400).send({message: 'Event not found'});
-        }
-        UserReg.find({eventAtt: req.params.id}, (err, attendees) => {
-            if (attendees) {
-                attendees.forEach(attendee => {
-                    attendee.remove();
-                });
-            }
-            event.remove(err => {
-                if (err) {
-                    return res.status(500).send({message: err.message});
-                }
-                res.status(200).send({message: 'Event and attendees successfully deleted.'})
-            });
-        });
-    });
-});
+
 
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewEncapsulation, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Event } from '../../events.model';
@@ -6,17 +6,22 @@ import { Observable, observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 
+
 import { FormControl } from '@angular/forms';
 
 import { EventsService } from '../../events.service';
 import { Attendee } from '../../events.model';
 
+
 @Component({
   selector: 'app-event-register',
   templateUrl: './event-register.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./event-register.component.css']
 })
 export class EventRegisterComponent implements OnInit {
+
+
 
   events: Event[]
   sex = null;
@@ -31,13 +36,14 @@ export class EventRegisterComponent implements OnInit {
   occupations = ["Student", "Proffessional", "Other"];
 
 
-  constructor(private eventsService: EventsService, public route: ActivatedRoute) { }
+  constructor(private eventsService: EventsService, public route: ActivatedRoute, private changeDetectorRefs: ChangeDetectorRef) { }
 
 
   ngOnInit() {
     this.eventsService.getEvents()
       .subscribe(data => {
         this.events = data
+        this.changeDetectorRefs.detectChanges();
         console.log(data);
 
       }, err => {

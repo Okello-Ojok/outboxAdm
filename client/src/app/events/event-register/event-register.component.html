@@ -1,90 +1,141 @@
-<div class="card">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title class="title">
+<div class="container attendereg">
+
+  <div class="row">
+    <div class="col-md-9">
+
+      <mat-card>
         <h1>Event Registration</h1>
 
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form (submit)="onAddAttendee(attendeeForm)" #attendeeForm="ngForm">
+        <form (submit)="onAddAttendee(attendeeForm)" #attendeeForm="ngForm">
 
-        <div class="fiveEvents">
-          <h4>Choose Event to register for.</h4>
-          <mat-button-toggle-group name="ourEvents" [ngModel]="ourEvents?.upcoming" #upcoming="ngModel" required>
-            <mat-button-toggle *ngFor="let upcoming of events" [value]="upcoming">{{upcoming.eventname}}</mat-button-toggle>
+          <div class="fiveEvents">
+            <h4>Choose Event to register for.</h4>
+            <mat-button-toggle-group name="ourEvents" [ngModel]="ourEvents?.upcoming" #upcoming="ngModel" required>
+              <mat-button-toggle *ngFor="let upcoming of events" [value]="upcoming" class="eventStyle">
+                <span class="name">{{upcoming.eventname}}</span>
+                
+                <!-- <span class="day">{{upcoming.eventDate | date: 'dd'}}</span>
+                
+                <span class="month">{{upcoming.eventDate | date: 'MM'}}</span>
+                <span class="year">{{upcoming.eventDate | date: 'yyyy'}}</span> -->
 
-          </mat-button-toggle-group>
+                <div class="post-submitted-info">
+                    <div class="submitted-date">
+                      <div class="month">{{upcoming.eventDate | date: 'MMM'}}</div>
+                      <div class="day">{{upcoming.eventDate | date: 'dd'}}</div>
+                      <div class="year">{{upcoming.eventDate | date: 'yyyy'}}</div>
+                    </div>
+                  </div>
 
+
+              </mat-button-toggle>
+
+            </mat-button-toggle-group>
+
+          </div>
+
+
+          <!-- <div class="post-submitted-info">
+            <div class="submitted-date">
+              <div class="month">Oct</div>
+              <div class="day">30</div>
+              <div class="year">2014</div>
+            </div>
+          </div> -->
+
+
+          <table class="full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="First Name" [ngModel]="attendee?.firstname" name="firstname" #firstname="ngModel"
+                    required>
+                </mat-form-field>
+              </td>
+
+              <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Last Name" [ngModel]="attendee?.lastname" name="lastname" #lastname="ngModel"
+                    required>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+          <table class="full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Email" [ngModel]="attendee?.email" name="email" #email="ngModel"
+                    required>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="Telephone" [ngModel]="attendee?.telephone" name="telephone" #telephone="ngModel"
+                    required>
+                </mat-form-field>
+              </td>
+
+            </tr>
+          </table>
+          <table class="full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-select placeholder="Gender" name="gender" [ngModel]="attendee?.sex" #sex="ngModel" required>
+                    <mat-option *ngFor="let sex of gender" [value]="sex">
+                      {{sex}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+
+              <td>
+                <mat-form-field>
+                  <mat-select placeholder="Occupation" name="occupation" [ngModel]="attendee?.occupation" #occupation="ngModel"
+                    required>
+                    <mat-option *ngFor="let occupation of occupations" [value]="occupation">
+                      {{occupation}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+          <button mat-raised-button type="submit" color="primary">Register</button>
+        </form>
+
+      </mat-card>
+
+
+
+    </div>
+    <div class="col-md-3">
+      <mat-card id="sociallinks">
+        <div>
+          <ul id="social">
+
+            <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+
+            <li><i class="fa fa-twitter"></i><a href="https://www.twitter.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+
+            <li><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/company/outbox-uganda" target="_blank">Outbox-Ltd</a></li>
+
+            <li><i class="fa fa-instagram"></i><a href="#" target="_blank">On Instagram</a></li>
+
+            <li><i class="fa fa-youtube"></i><a href="https://www.youtube.com/channel/UCKNuI2jIWJdSB4Rl9iORMVw" target="_blank">
+                on YouTube</a></li>
+
+            <li><i class="fa fa-medium"></i><a href="https://medium.com/outbox-stories" target="_blank">On Medium</a></li>
+
+            <li><i class="fa fa-google-plus"></i><a href="https://plus.google.com/+OutboxCoUg" target="_blank">On
+                Google +</a></li>
+          </ul>
         </div>
 
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="First Name" [ngModel]="attendee?.firstname" name="firstname" #firstname="ngModel"
-                  required>
-              </mat-form-field>
-            </td>
 
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Last Name" [ngModel]="attendee?.lastname" name="lastname" #lastname="ngModel"
-                  required>
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
+      </mat-card>
+    </div>
+  </div>
 
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Email" [ngModel]="attendee?.email" name="email" #email="ngModel" required>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Telephone" [ngModel]="attendee?.telephone" name="telephone" #telephone="ngModel"
-                  required>
-              </mat-form-field>
-            </td>
-
-          </tr>
-        </table>
-
-
-
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td>
-              <mat-form-field>
-                <mat-select placeholder="Gender" name="gender" [ngModel]="attendee?.sex" #sex="ngModel" required>
-                  <mat-option *ngFor="let sex of gender" [value]="sex">
-                    {{sex}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-
-            <td>
-              <mat-form-field>
-                <mat-select placeholder="Occupation" name="occupation" [ngModel]="attendee?.occupation" #occupation="ngModel"
-                  required>
-                  <mat-option *ngFor="let occupation of occupations" [value]="occupation">
-                    {{occupation}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-
-
-        <button mat-raised-button type="submit" color="primary">Register</button>
-
-      </form>
-    </mat-card-content>
-
-  </mat-card>
 </div>
