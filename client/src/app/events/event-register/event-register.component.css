@@ -24,7 +24,7 @@
     margin: 5px; 
     border: 1px solid white;
     color: white;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     background: #0087D9;
 }
 
@@ -167,7 +167,7 @@
 } */
 #social li{
     border: 1px solid white;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     margin-top: 10px;
     text-align: center;
     /* background: white; */
