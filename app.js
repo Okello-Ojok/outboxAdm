@@ -6,12 +6,13 @@ var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var _ = require('lodash');
 require('./models/db');
 
 //var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var assetsRouter = require('./routes/assets');
-var eventsRouter = require('./routes/events');
+// var eventsRouter = require('./routes/events');
 var utilitiesRouter = require('./routes/utilities');
 var eventregRouter = require('./routes/eventreg');
 
@@ -48,7 +49,7 @@ app.use(cookieParser());
 //app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/assets', assetsRouter);
-app.use('/api/events', eventsRouter);
+// app.use('/api/events', eventsRouter);
 app.use('/api/utilities', utilitiesRouter);
 app.use('/api/eventreg', eventregRouter);
 

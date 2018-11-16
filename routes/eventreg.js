@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var _ = require('lodash');
 
 
 const UserReg = mongoose.model('UserReg');
@@ -293,30 +294,6 @@ router.get('/attendees', (req, res, next) => {
   });
 });
 
-// Endpoint to count all event attendees
-// router.get('/count-attendees', (req, res, next) => {
-//   UserReg.aggregate({
-//     $group: {
-//       _id: 1,
-//       count: {
-//         $sum: 1
-//       }
-//     }
-//   }, (err, total) => {
-//     if (err) {
-//       return res.status(500).send({
-//         message: err.message
-//       })
-//     }
-//     if (total) {
-//       console.log(total)
-//       res.send(total)
-
-//     }
-//   })
-// });
-
-
 
 
 // GET Attendees by event ID
@@ -346,39 +323,42 @@ router.get('/:eventAtt/attendees', (req, res) => {
 
 
 // Check event date if it exists
-router.get('/checkdates', (req, res) => {
+// router.get('/checkdates', (req, res) => {
+
+//     Date.prototype.addDays = function (days) {
+//       let date = new Date(this.valueOf());
+//       date.setDate(date.getDate() + days);
+//       return date;
+//     }
+
+//     function getDates(startDate, stopDate) {
+//       let dateArray = [];
+//       let currentDate = startDate;
+//       while (currentDate <= stopDate) {
+//         dateArray.push(new Date(currentDate));
+//         currentDate = currentDate.addDays(1);
+//       }
+//       return dateArray;
+//     }
+
+//     let dateArray = getDates(new Date(), (new Date()).addDays(30));
+//     for (i = 0; i < dateArray.length; i++) {
+//       console.log(dateArray[i]);
+//     }
+//    res.send(dateArray)
 
 
-  
-    Date.prototype.addDays = function (days) {
-      let date = new Date(this.valueOf());
-      date.setDate(date.getDate() + days);
-      return date;
-    }
 
-    function getDates(startDate, stopDate) {
-      let dateArray = [];
-      let currentDate = startDate;
-      while (currentDate <= stopDate) {
-        dateArray.push(new Date(currentDate));
-        currentDate = currentDate.addDays(1);
-      }
-      return dateArray;
-    }
+// })
 
-    let dateArray = getDates(new Date(), (new Date()).addDays(30));
-    for (i = 0; i < dateArray.length; i++) {
-      console.log(dateArray[i]);
-    }
-  res.send(dateArray)
 
-})
 
 // This returns an array with dates in the db
-router.get('/chec', (req, res) =>{
+router.get('/dates', (req, res) =>{
 
     Events.find({}, 'eventDate -_id', (err, events) =>{
         let dates = [];
+        let dateArr = []
         // events.eventDate= events;
         if (err) {
             return res.status(500).send({message: err.message});
@@ -387,9 +367,7 @@ router.get('/chec', (req, res) =>{
             events.forEach(event => {
                 // Object.values(event)
                 dates.push(event);
-               
-
-
+                // dateArr = _.map(dates, 'eventDate')
                 console.log(dates);   
             });
         }

@@ -20,7 +20,7 @@ import { Attendee } from '../../events.model';
   styleUrls: ['./event-register.component.css']
 })
 export class EventRegisterComponent implements OnInit {
-
+ 
 
 
   events: Event[]

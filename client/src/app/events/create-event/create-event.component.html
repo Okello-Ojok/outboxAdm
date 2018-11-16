@@ -21,7 +21,7 @@
                   <tr>
                     <td>
                       <mat-form-field class="full-width">
-                        <input matInput [matDatepicker]="picker" placeholder="Event Date" [ngModel]="event?.eventDate" name="eventDate"
+                        <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" placeholder="Event Date" [ngModel]="event?.eventDate" name="eventDate"
                         #eventDate="ngModel" required>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -61,7 +61,30 @@
           </mat-card>
     </div>
     <div class="col-md-3">
+      <mat-card id="sociallinks">
+        <div>
+          <ul id="social">
 
+            <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+
+            <li><i class="fa fa-twitter"></i><a href="https://www.twitter.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+
+            <li><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/company/outbox-uganda" target="_blank">Outbox-Ltd</a></li>
+
+            <li><i class="fa fa-instagram"></i><a href="#" target="_blank">On Instagram</a></li>
+
+            <li><i class="fa fa-youtube"></i><a href="https://www.youtube.com/channel/UCKNuI2jIWJdSB4Rl9iORMVw" target="_blank">
+                on YouTube</a></li>
+
+            <li><i class="fa fa-medium"></i><a href="https://medium.com/outbox-stories" target="_blank">On Medium</a></li>
+
+            <li><i class="fa fa-google-plus"></i><a href="https://plus.google.com/+OutboxCoUg" target="_blank">On
+                Google +</a></li>
+          </ul>
+        </div>
+
+
+      </mat-card>
     </div>
   </div>
 </div>

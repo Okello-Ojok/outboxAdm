@@ -65,6 +65,18 @@ export class EventsService {
     );
   }
 
+  getEventDates(): Observable<Event[]> {
+    return this.http.get<Event[]>(addr + '/eventreg/dates')
+  }
+
+  countAttendance(): Observable<any>{
+    return this.http.get<any>(addr + '/eventreg/attendance')
+  }
+
+  countEvents(): Observable<any>{
+    return this.http.get<any>(addr + '/eventreg/countevents')
+  }
+
 
 
   // GET an event by ID
@@ -195,7 +207,7 @@ export class EventsService {
 
   // DELETE Event and associated attendees
   deleteEvent(id: string) {
-    return this.http.delete(addr + "/eventreg/" + id)
+    return this.http.delete(addr + "/eventreg/event" + id)
       // .subscribe(() => {
       //   const updatedEvents = this.events.filter(event => event.id !== id)
       //   this.events = updatedEvents

@@ -19,6 +19,11 @@ export class CreateEventComponent implements OnInit {
   private mode = "create";
   private eventID: string;
   eventDate;
+  dates: Event[];
+  
+
+
+  
   
 
   constructor(public eventsService: EventsService, public route: ActivatedRoute) { }
@@ -26,6 +31,22 @@ export class CreateEventComponent implements OnInit {
   ngOnInit() {
     this.eventDate = new Date();
 
+    this.eventsService.getEventDates()
+    .subscribe(data => {
+      this.dates = data
+      console.log(data); 
+    })
+    // console.log(this.dates);
+    // this.eventsService.countAttendance()
+    // .subscribe(data => {
+    //   this.count = data
+    //   console.log(data); 
+    // })
+    
+
+    
+      
+    
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('eventID')) {
         this.mode = 'edit';
@@ -43,6 +64,8 @@ export class CreateEventComponent implements OnInit {
 
     });
   }
+
+  
 
   onAddEvent(form: NgForm) {
     if (form.invalid) {
