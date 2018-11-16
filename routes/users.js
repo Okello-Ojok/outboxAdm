@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
+var config = require('../config/db');
 
 const UserReg = mongoose.model('Person');
 
@@ -56,26 +57,25 @@ router.get('/userReg/:id', (req, res, next) => {
   });
 });
 
-//geting user by name
+//geting user by name (Authenticate)
 router.get('/userReg/fn/:fn', (req, res, next) => {
-  UserReg.find({firstname: req.params.fn}, (err, issues) => {
-      if(err)
-          console.log(err);
-      else 
-          res.json(issues);
+
+  const fname = {firstname: req.params.fn};
+  const password = req.body.password;
+
+  UserReg.find(fname, (err, user) => {
+      if(err) throw err;
+      if (!fname) {
+        console.log({success: false, msg: "User not found"})
+      } else {
+        res.json(issues);
+      }
   });
 });
 
-//getting user by name
-// router.get('/userReg/firstname', (req, res, next) => {
-//   // var query = { 'firstname': req.params.firstname};
-//   UserReg.findOne({ 'firstname': req.body.firstname }, (err, name) => {
-//       if(err)
-//           console.log(err);
-//       else 
-//           res.send(name);
-//   });
-// });
+router.comparePassword = () => {
+
+};
 
 //updating userinfo
 router.put('/userReg/edit/:id', (req, res, next) => {

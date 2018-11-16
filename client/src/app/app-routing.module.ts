@@ -19,13 +19,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EventDetailComponent } from './events/events/event-detail/event-detail.component';
 import { PageUnder0constructionComponent } from './page-under0construction/page-under0construction.component';
 import { ChartsComponent } from './charts/charts.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/register',
     pathMatch: 'full'
 
   },
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'admin-register',
@@ -60,7 +65,7 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventsComponent
-    
+
   },
   {
     path: 'event-details/:id',
@@ -88,7 +93,7 @@ const routes: Routes = [
   },
   {
     path: 'page-under-construction',
-    component:   PageUnder0constructionComponent
+    component: PageUnder0constructionComponent
 
   },
   {

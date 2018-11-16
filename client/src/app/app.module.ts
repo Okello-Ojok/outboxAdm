@@ -33,6 +33,10 @@ import { EventsBoardComponent } from './events/events-board/events-board.compone
 import { LoadingComponent } from './loading.component';
 import { PageUnder0constructionComponent } from './page-under0construction/page-under0construction.component';
 import { ChartsComponent } from './charts/charts.component';
+import { RegisterComponent } from './register/register.component';
+
+import { UserService } from './user.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,8 @@ import { ChartsComponent } from './charts/charts.component';
     EventsBoardComponent,
     LoadingComponent,
     PageUnder0constructionComponent,
-    ChartsComponent
+    ChartsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,7 @@ import { ChartsComponent } from './charts/charts.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    MatMenuModule, 
+    MatMenuModule,
     MatTableModule,
     MatPaginatorModule, MatBadgeModule,
     MatSortModule,
@@ -89,9 +94,9 @@ import { ChartsComponent } from './charts/charts.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule
-
   ],
-  providers: [ResidentsService, EventsService],
+
+  providers: [ResidentsService, EventsService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

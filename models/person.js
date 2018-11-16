@@ -58,5 +58,7 @@ personSchema.pre('save', function(next) {
     });
 });
 
+
+
 module.exports = mongoose.model('Person', personSchema, 'auth');
 // exports.personSchema = {personSchema};
