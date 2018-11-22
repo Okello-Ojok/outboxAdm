@@ -1,0 +1,16 @@
+<div class="dialog">
+  <h2 mat-dialog-title>OUTBOX HUB</h2>
+  <img src="assets/images/outbox.png">
+  <hr>
+  <mat-dialog-content>
+    Thank you for creating an event.
+    <br>
+    <br>
+    <strong>{{data}}</strong>
+  </mat-dialog-content>
+  <hr>
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="onCloseConfirm()">CONFIRM</button>&nbsp;
+    <button mat-raised-button (click)="onCloseCancel()">CANCEL</button>
+  </mat-dialog-actions>
+</div>
