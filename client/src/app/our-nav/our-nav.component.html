@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Outbox Admin</mat-toolbar>
+    <mat-toolbar color="primary"> <img src="assets/images/outbox.png"></mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="/home">
         <mat-icon>
@@ -35,7 +35,7 @@
         </mat-icon>
         Residents
       </a>
-      <a mat-list-item href="/page-under-construction">
+      <!-- <a mat-list-item href="/page-under-construction">
         <mat-icon>
           <i class="material-icons">
             money
@@ -67,7 +67,7 @@
           </i>
         </mat-icon>
         My Account
-      </a>
+      </a> -->
 
     </mat-nav-list>
   </mat-sidenav>
@@ -84,31 +84,97 @@
     <div class="container front">
       <div class="row">
         <div class="col-md-4">
+
             <mat-card class="card1">
-                <mat-icon>
-                  <i class="material-icons">
-                    event
-                  </i>
-                </mat-icon>
-                Events Created  
-                <div>
-                  {{countEvt}}
-                </div>
-                
+              <div class="content">
+                <div class="row">
+                  <div class="col-5">
+                      <mat-icon class="icon-events">
+                          <i class="material-icons">
+                            event
+                          </i>
+                        </mat-icon>
+                  </div>
+                  <div class="col-7">
+                      <div class="numbers">
+                          <p>Events Created</p>
+                          <div class="count">
+                              {{countEvt}}
+                          </div>
+                      </div>
+                  </div>
+                  
+                </div> 
+                <div class="footer">
+                    <hr />
+                    <div class="stats">
+                        <i class="fas fa-sync-alt"></i> Events from Nov-2018
+                    </div>
+                </div>     
+              </div> 
               </mat-card>
         </div>
+
+
         <div class="col-md-4">
-            <mat-card class="card2">Event Attendees 
-              <div>
-                {{countAtt}}
-              </div> 
+            <mat-card class="card2">
+                <div class="content">
+                    <div class="row">
+                      <div class="col-4">
+                          <mat-icon class="icon-attend">
+                              <i class="material-icons">
+                                people
+                              </i>
+                            </mat-icon>
+                      </div>
+                      <div class="col-8">
+                          <div class="numbers">
+                              <p>Event Attendances</p>
+                              <div class="count">
+                                  {{countAtt}}
+                              </div>
+                          </div>
+                      </div>
+                      
+                    </div> 
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="fas fa-sync-alt"></i> Events from Nov-2018
+                        </div>
+                    </div>     
+                  </div>               
             </mat-card>
         </div>
         <div class="col-md-4">
-            <mat-card class="3">Keynote Speeches 
-              <div>
-                  {{countEvt}} 
-              </div>
+            <mat-card class="3">
+                <div class="content">
+                    <div class="row">
+                      <div class="col-5">
+                          <mat-icon class="icon-key">
+                              <i class="material-icons">
+                                mic_none
+                              </i>
+                            </mat-icon>
+                      </div>
+                      <div class="col-7">
+                          <div class="numbers">
+                              <p>Keynote speeches</p>
+                              <div class="count">
+                                  {{countEvt}}
+                              </div>
+                          </div>
+                      </div>
+                      
+                    </div> 
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="fas fa-sync-alt"></i> Events from Nov-2018
+                        </div>
+                    </div>     
+                  </div> 
+              
             </mat-card>
         </div>
       </div>

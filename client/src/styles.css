@@ -2,13 +2,16 @@
 
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body {
+  font-family: 'Roboto' !important;
+}
+
 
 button.mat-primary {
-  background: #0087D9 !important;
+  background: #299ADF !important;
 }
 
 /* .mat-button-toggle-label-content {
@@ -22,6 +25,18 @@ button.mat-primary {
 } */
 
 /* fontawesome */
+
+
+#social .svg-inline--fa{
+  color: #299ADF;
+  font-size: 20px;
+  width: 20px;
+  text-align: center;
+  text-decoration: none;
+
+}
+
+
 .fa {
   font-size: 17px;
   width: 20px;
@@ -34,7 +49,7 @@ button.mat-primary {
 }
 
 #sociallinks{
-  background: #0087D9;
+  /* background: #0087D9; */
   color: white;
 }
 
@@ -49,11 +64,11 @@ button.mat-primary {
   
 } */
 #social li{
-  border: 1px solid white;
+  /* border: 1px solid #299ADF; */
   /* border-radius: 50px; */
   margin-top: 10px;
   text-align: center;
-  /* background: white; */
+  background: #F5F5F5;
 }
 
 
@@ -64,13 +79,14 @@ button.mat-primary {
 #sociallinks a{
   text-decoration: none;
   /* padding-bottom: 15px; */
-  color: white;
+  color: #299ADF;
 }
 
 
 
 #social li {
-  background: #0087D9;
+  /* background: #0087D9; */
+  padding: 10px;
   cursor: pointer;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
@@ -79,8 +95,8 @@ button.mat-primary {
 }
 
 #social li:hover {
-  background: white;
-  color: #0087D9;
+  background: #299ADF;
+  color: white;
   background-position: 100% 0;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
@@ -88,9 +104,9 @@ button.mat-primary {
   transition: all .4s ease-in-out;
 }
 
-#social li:hover a, #social li:hover .fa{
+#social li:hover a, #social li:hover .svg-inline--fa{
   /* background: white; */
-  color: #0087D9;
+  color: white;
   background-position: 100% 0;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
@@ -98,12 +114,11 @@ button.mat-primary {
   transition: all .4s ease-in-out;
 }
 
-
-
-
-#social li:focus {
-  outline: none;
+.dialog{
+  text-align: center;
 }
+
+
 
 
 

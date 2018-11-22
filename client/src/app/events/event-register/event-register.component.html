@@ -10,22 +10,32 @@
 
           <div class="fiveEvents">
             <h4>Choose Event to register for.</h4>
+            
             <mat-button-toggle-group name="ourEvents" [ngModel]="ourEvents?.upcoming" #upcoming="ngModel" required>
               <mat-button-toggle *ngFor="let upcoming of events" [value]="upcoming" class="eventStyle">
                 <span class="name">{{upcoming.eventname}}</span>
                 
-                <!-- <span class="day">{{upcoming.eventDate | date: 'dd'}}</span>
-                
-                <span class="month">{{upcoming.eventDate | date: 'MM'}}</span>
-                <span class="year">{{upcoming.eventDate | date: 'yyyy'}}</span> -->
-
-                <div class="post-submitted-info">
+          
+                <!-- <div class="post-submitted-info">
                     <div class="submitted-date">
                       <div class="month">{{upcoming.eventDate | date: 'MMM'}}</div>
                       <div class="day">{{upcoming.eventDate | date: 'dd'}}</div>
                       <div class="year">{{upcoming.eventDate | date: 'yyyy'}}</div>
                     </div>
+                  </div> -->
+                  
+                  <div class="fa-5x">
+                      <span class="fa-layers fa-fw">
+                          <i class="fas fa-calendar"></i>
+                          <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-7 down-1" style="font-weight:900;font-size: 60px">
+                            {{upcoming.eventDate | date: 'dd'}}
+                          </span>
+                          <span class="fa-layers-text fa-inverse month" data-fa-transform="shrink-12 down-6" style="font-weight:800;text-transform: uppercase">
+                            {{upcoming.eventDate | date: 'MMM'}}
+                          </span>
+                        </span>
                   </div>
+                  
 
 
               </mat-button-toggle>
@@ -114,21 +124,21 @@
       <mat-card id="sociallinks">
         <div>
           <ul id="social">
+              
+            <li><i class="fab fa-facebook-f"></i><a href="https://www.facebook.com/OutboxHub" target="_blank">@OutboxHub</a></li>
 
-            <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+            <li><i class="fab fa-twitter"></i><a href="https://www.twitter.com/OutboxHub" target="_blank">@OutboxHub</a></li>
 
-            <li><i class="fa fa-twitter"></i><a href="https://www.twitter.com/OutboxHub" target="_blank">@OutboxHub</a></li>
+            <li><i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/company/outbox-uganda" target="_blank">Outbox-Ltd</a></li>
 
-            <li><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/company/outbox-uganda" target="_blank">Outbox-Ltd</a></li>
+            <li><i class="fab fa-instagram"></i><a href="#" target="_blank">On Instagram</a></li>
 
-            <li><i class="fa fa-instagram"></i><a href="#" target="_blank">On Instagram</a></li>
-
-            <li><i class="fa fa-youtube"></i><a href="https://www.youtube.com/channel/UCKNuI2jIWJdSB4Rl9iORMVw" target="_blank">
+            <li><i class="fab fa-youtube"></i><a href="https://www.youtube.com/channel/UCKNuI2jIWJdSB4Rl9iORMVw" target="_blank">
                 on YouTube</a></li>
 
-            <li><i class="fa fa-medium"></i><a href="https://medium.com/outbox-stories" target="_blank">On Medium</a></li>
+            <li><i class="fab fa-medium"></i><a href="https://medium.com/outbox-stories" target="_blank">On Medium</a></li>
 
-            <li><i class="fa fa-google-plus"></i><a href="https://plus.google.com/+OutboxCoUg" target="_blank">On
+            <li><i class="fab fa-google-plus-g"></i><a href="https://plus.google.com/+OutboxCoUg" target="_blank">On
                 Google +</a></li>
           </ul>
         </div>

@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonToggleModule, MatBadgeModule, MatFormFieldModule, MatAutocompleteModule, MatButtonModule, MatProgressSpinnerModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatInputModule, MatSelectModule, MatOptionModule, MatRadioModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatToolbarModule, MatDialogModule, MatButtonToggleModule, MatBadgeModule, MatFormFieldModule, MatAutocompleteModule, MatButtonModule, MatProgressSpinnerModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatInputModule, MatSelectModule, MatOptionModule, MatRadioModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 import { OurNavComponent } from './our-nav/our-nav.component';
 import { MyDashComponent } from './my-dash/my-dash.component';
@@ -33,6 +33,8 @@ import { EventsBoardComponent } from './events/events-board/events-board.compone
 import { LoadingComponent } from './loading.component';
 import { PageUnder0constructionComponent } from './page-under0construction/page-under0construction.component';
 import { ChartsComponent } from './charts/charts.component';
+import { SubmitEventComponent } from './dialogs/submit-event/submit-event.component';
+import { SubmitAttendComponent } from './dialogs/submit-attend/submit-attend.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { ChartsComponent } from './charts/charts.component';
     EventsBoardComponent,
     LoadingComponent,
     PageUnder0constructionComponent,
-    ChartsComponent
+    ChartsComponent,
+    SubmitEventComponent,
+    SubmitAttendComponent
   ],
   imports: [
     BrowserModule,
@@ -88,10 +92,12 @@ import { ChartsComponent } from './charts/charts.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
 
   ],
   providers: [ResidentsService, EventsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SubmitEventComponent]
 })
 export class AppModule { }

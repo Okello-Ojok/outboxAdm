@@ -12,7 +12,14 @@
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
-  background: #0087D9 !important;
+  background: #FAFAFA !important;
+}
+
+.mat-nav-list .mat-list-item{
+  color: #66615b;
+}
+.mat-nav-list .active{
+  color: #299ADF !important;
 }
 
 .material-icons{
@@ -26,15 +33,104 @@
 }
 .front .mat-card{
   /* width: 180px; */
-  height: 100px;
-  margin-top: 20px;
-  margin-bottom: 70px;
+  /* height: 100px; */
+  /* margin-top: 20px; */
+  margin-bottom: 40px;
 }
-.material-icons[_ngcontent-c1] {
+
+.mat-card{
+  border-radius: 6px;
+    box-shadow: 0 2px 2px hsla(38,16%,76%,.5);
+    background-color: #fff;
+    color: #252422;
+    /* margin-bottom: 20px; */
+    position: relative;
+    z-index: 1;
+}
+.mat-card .content {
+  padding: 15px 15px 10px 15px;
+}
+
+.mat-card .material-icons {
+  font-size: 2em;
+  min-height: 64px;
+}
+
+.mat-card .numbers {
+  font-size: 2em;
+  text-align: right;
+}
+.mat-card .numbers p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4em;
+}
+.mat-card .footer {
+  padding: 0;
+  line-height: 30px;
+}
+.footer {
+  background-attachment: fixed;
+  position: relative;
+}
+.mat-card .footer hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: #f1eae0;
+}
+.mat-card .stats {
+  color: #a9a9a9;
+  font-weight: 300;
+}
+
+.mat-card .footer .fa{
+  color: #a9a9a9
+}
+.icon-events{
+  color: #FD2C65;
+}
+.icon-attend{
+  color: #67EC08;
+}
+.icon-key{
+  color: #f3bb45;
+}
+/* p {
+  font-size: 16px;
+  line-height: 1.4em;
+} */
+
+
+/* .material-icons[_ngcontent-c1] {
   padding-right: 10px;
+} */
+
+.card-info {
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+  top: 0;
+  left: 0;
+  /* color: white; */
+}
+
+.submitted {
+  margin: 10px 0 0 0;
+  /* border-right: 1px solid #c2c2c2; */
+  padding-bottom: 10px;
+}
+
+.submitted-info {
+  font-weight: 700;
+  text-align: center;
+  line-height: 1;
+  top: 0;
+  left: 0;
 }
 
 
-
-
-
+.card-info .count {
+  font-size: 25px;
+  font-weight: 900;
+  margin-bottom: 2px;
+}

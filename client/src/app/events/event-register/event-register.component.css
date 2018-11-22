@@ -8,7 +8,7 @@
   }
   
   .full-width {
-    width: 100%;
+    width: 95%;
   }
   .fiveEvents{
     margin-bottom: 20px;
@@ -19,47 +19,52 @@
   
   .mat-button-toggle{
     width: 100%;
-    height: 95px;
-    /* border: 2px solid #e0e0e0; */
     margin: 5px; 
     border: 1px solid white;
-    color: white;
-    /* border-radius: 50px; */
-    background: #0087D9;
+    color: #299ADF;
 }
 
 .mat-button-toggle-checked {
     background-color: white;
-    color: #0087D9 !important;
-    border: 1px solid #0087D9;
-}
-
-.mat-button-toggle-checked .post-submitted-info{
-    /* background-color: white; */
-    color: #0087D9 !important;
+    color: #299ADF !important;
     /* border: 1px solid #0087D9; */
 }
 
+.mat-button-toggle-checked .post-submitted-info, .mat-button-toggle-checked .fa-4x,
+.mat-button-toggle-checked .name {
+    background-color: white;
+    color: #FD2C65 !important;
+    /* border: 1px solid #0087D9; */
+}
+.fa-layers-text{
+    color: white;
+}
+.fiveEvents .fa-4x{
+    color: #299ADF;
+}
 
-.mat-button-toggle:hover {
-  background-color: white;
-  color: #0087D9;
-  border: 1px solid #0087D9;
+/* .mat-button-toggle:hover {
+  background-color: black;
+  color: #299ADF;
   background-position: 100% 0;
     -moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
-} 
+}  */
 
 .mat-button-toggle:hover .post-submitted-info{
-    /* background-color: white; */
-    color: #0087D9;
+    
+    color: #299ADF;
     background-position: 100% 0;
     -moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
+  }
+  .mat-button-toggle:hover .fa-4x {
+    background-color: white;
+    color: #299ADF;
   }
 
 /* #social li:hover a, #social li:hover .fa{
@@ -84,6 +89,9 @@
     font-size: 14px;
     text-transform: uppercase;
 } */
+.calendar-text { 
+    margin-top: .3em !important; 
+  }
 
 .post-submitted-info {
     font-weight: 700;
@@ -91,7 +99,7 @@
     line-height: 1;
     top: 0;
     left: 0;
-    color: white;
+    color: #299ADF;
 }
 /* .post-submitted-info:hover{
     color: #0087D9;
@@ -133,6 +141,15 @@
     font-size: 14px;
     text-transform: uppercase;
 }
+
+/* .fa-layers .month{
+    font-weight: 700 !important;
+    text-align: center;
+    line-height: 1;
+    
+    font-size: 14px;
+    text-transform: uppercase;
+} */
 
 
 /* .attendereg{

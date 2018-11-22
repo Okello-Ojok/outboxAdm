@@ -207,7 +207,7 @@ export class EventsService {
 
   // DELETE Event and associated attendees
   deleteEvent(id: string) {
-    return this.http.delete(addr + "/eventreg/event" + id)
+    return this.http.delete(addr + "/eventreg/event/" + id)
       // .subscribe(() => {
       //   const updatedEvents = this.events.filter(event => event.id !== id)
       //   this.events = updatedEvents

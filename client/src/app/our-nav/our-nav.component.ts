@@ -10,7 +10,7 @@ import { Event } from '../events.model';
 @Component({
   selector: 'app-our-nav',
   templateUrl: './our-nav.component.html',
-  styleUrls: ['./our-nav.component.css']
+  styleUrls: ['./our-nav.component.css'],
 })
 export class OurNavComponent implements OnInit{
 
@@ -43,6 +43,7 @@ export class OurNavComponent implements OnInit{
       
     // })
     this.refreshCards();
+    this.refreshCards1();
     
   }
 
@@ -54,7 +55,8 @@ export class OurNavComponent implements OnInit{
       this.changeDetectorRefs.detectChanges();
       
     })
-
+  }
+  refreshCards1(){
     this.eventsService.countAttendance()
     .subscribe(data => {
       this.countAtt = data;

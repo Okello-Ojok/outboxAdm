@@ -5,6 +5,10 @@
     <br><br>
     <mat-divider></mat-divider>
     <br>
+    <div class="example-loading-shade" *ngIf="isLoading">
+        <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+        <img *ngIf="isLoading" src="assets/cube.gif"/>
+      </div>
     <table mat-table [dataSource]="residents" class="mat-elevation-z8">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
