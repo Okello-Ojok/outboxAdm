@@ -18,21 +18,6 @@ var eventregRouter = require('./routes/eventreg');
 
 
 var app = express();
-server = require('http').createServer(app);
-io = require('socket.io')(server);
-
-
-// socket io
-io.on('connection', function (socket) {
-  console.log('User connected');
-  socket.on('disconnect', function() {
-    console.log('User disconnected');
-  });
-  socket.on('save-message', function (data) {
-    console.log(data);
-    io.emit('new-message', { message: data });
-  });
-});
 
 
 if (process.env.NODE_ENV === 'production') {
