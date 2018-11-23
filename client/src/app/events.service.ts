@@ -13,7 +13,7 @@ import { Attendee } from './events.model';
 
 
 
-enableProdMode();
+// enableProdMode();
 let addr = (<any>config).live_server;
 if (isDevMode()) {
   
