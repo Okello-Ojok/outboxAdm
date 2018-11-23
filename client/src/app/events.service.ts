@@ -12,15 +12,15 @@ import { Event } from './events.model';
 import { Attendee } from './events.model';
 
 let addr = (<any>config).live_server;
-if (isDevMode()) {
-  // dev code
-  addr = (<any>config).local_server;
-  console.log('development');
- } else {
-  // production code
+// if (isDevMode()) {
+  
+//   addr = (<any>config).local_server;
+//   console.log('development');
+//  } else {
+  
   addr = (<any>config).live_server;
   console.log('live');
- }
+//  }
 
 //import { Observable } from 'rxjs';
 
