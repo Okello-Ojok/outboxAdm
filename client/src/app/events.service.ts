@@ -14,7 +14,7 @@ import { Attendee } from './events.model';
 let addr = (<any>config).live_server;
 if (isDevMode()) {
   // dev code
-  addr = (<any>config).live_server;
+  addr = (<any>config).local_server;
   console.log('development');
  } else {
   // production code
