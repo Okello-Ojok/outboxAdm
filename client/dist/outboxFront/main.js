@@ -884,17 +884,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 // enableProdMode();
 var addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
-if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["isDevMode"])()) {
-    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["local_server"];
-    console.log('development');
-}
-else {
-    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
-    console.log('live');
-}
+// if (isDevMode()) {
+//   addr = (<any>config).local_server;
+//   console.log('development');
+//  } else {
+addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
+console.log('live');
+//  }
 //import { Observable } from 'rxjs';
 var EventsService = /** @class */ (function () {
     function EventsService(http, router) {
