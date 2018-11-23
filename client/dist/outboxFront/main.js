@@ -631,10 +631,10 @@ var CreateAssetComponent = /** @class */ (function () {
 /*!************************************!*\
   !*** ./src/app/config/server.json ***!
   \************************************/
-/*! exports provided: live_server, back_server, default */
+/*! exports provided: local_server, live_server, back_server, default */
 /***/ (function(module) {
 
-module.exports = {"live_server":"https://outboxdash.herokuapp.com/api","back_server":"/api"};
+module.exports = {"local_server":"http://localhost:3000/api","live_server":"https://outboxdash.herokuapp.com/api","back_server":"/api"};
 
 /***/ }),
 
@@ -884,15 +884,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // enableProdMode();
 var addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
-// if (isDevMode()) {
-//   addr = (<any>config).local_server;
-//   console.log('development');
-//  } else {
-addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
-console.log('live');
-//  }
+if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["isDevMode"])()) {
+    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["local_server"];
+    console.log('development');
+}
+else {
+    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
+    console.log('live');
+}
 //import { Observable } from 'rxjs';
 var EventsService = /** @class */ (function () {
     function EventsService(http, router) {
