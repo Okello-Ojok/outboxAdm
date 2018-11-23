@@ -9,7 +9,7 @@ import { ResidentsService } from '../residents.service';
 @Component({
   selector: 'app-residents-list',
   templateUrl: './residents-list.component.html',
-  styleUrls: ['./residents-list.component.css']
+  styleUrls: ['./residents-list.component.scss']
 })
 export class ResidentsListComponent implements OnInit {
 

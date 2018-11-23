@@ -18,7 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 //import { EventsListComponent } from './events/events-list/events-list.component';
 import { EventDetailComponent } from './events/events/event-detail/event-detail.component';
 import { PageUnder0constructionComponent } from './page-under0construction/page-under0construction.component';
-import { ChartsComponent } from './charts/charts.component';
+
 
 
 
@@ -29,10 +29,7 @@ const routes: Routes = [
     pathMatch: 'full'
 
   },
-  {
-    path: 'home',
-    component: ChartsComponent
-  },
+  
   {
     path: 'login',
     component: LoginComponent

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable, timer } from 'rxjs';
+
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -11,7 +13,7 @@ import { SubmitEventComponent } from '../../dialogs/submit-event/submit-event.co
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
-  styleUrls: ['./create-event.component.css']
+  styleUrls: ['./create-event.component.scss']
 })
 export class CreateEventComponent implements OnInit {
 
@@ -24,7 +26,8 @@ export class CreateEventComponent implements OnInit {
   eventDate;
   dates: Event[];
   data = "";
-
+  
+  
 
   constructor(public eventsService: EventsService, public route: ActivatedRoute,
     public dialog: MatDialog) { }
@@ -81,23 +84,31 @@ export class CreateEventComponent implements OnInit {
       );
     }
     form.resetForm();
+    // setTimeout(() => {
+    //   this.openDialog() 
+    //  }, 3000);
   }
 
-
+  // setTimeout("this.openDialog()", 3000);
   
-  openDialog() {
+ openDialog() {
     const dialogRef = this.dialog.open(SubmitEventComponent,
       {
         width: '400px',
-        data: 'This is the data'
+        data: 'Event created. Thank you!!!'
       })
+
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       this.data = result;
-    });
+    })
 
-    // dialogRef.close('Pizza!');
+    
   }
+
+  
+  
 
   
 

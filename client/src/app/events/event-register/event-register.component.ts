@@ -4,6 +4,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Event } from '../../events.model';
 import { Observable, observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SubmitAttendComponent } from '../../dialogs/submit-attend/submit-attend.component';
 
 
 
@@ -17,7 +19,7 @@ import { Attendee } from '../../events.model';
   selector: 'app-event-register',
   templateUrl: './event-register.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./event-register.component.css']
+  styleUrls: ['./event-register.component.scss']
 })
 export class EventRegisterComponent implements OnInit {
  
@@ -34,9 +36,10 @@ export class EventRegisterComponent implements OnInit {
 
   occupation = null;
   occupations = ["Student", "Proffessional", "Other"];
+  data = "";
 
 
-  constructor(private eventsService: EventsService, public route: ActivatedRoute, private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(private eventsService: EventsService, public route: ActivatedRoute, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -92,6 +95,23 @@ export class EventRegisterComponent implements OnInit {
     // }
     form.resetForm();
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(SubmitAttendComponent,
+      {
+        width: '400px',
+        data: 'You have successfully registered for an event. Thank you!!!'
+      })
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.data = result;
+    })
+
+    
+  }
+
 
   
 }

@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-submit-event',
   templateUrl: './submit-event.component.html',
-  styleUrls: ['./submit-event.component.css']
+  styleUrls: ['./submit-event.component.scss']
 })
 export class SubmitEventComponent implements OnInit {
 
@@ -14,9 +14,9 @@ export class SubmitEventComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCloseConfirm(){
-    this.thisDialogRef.close('Close');
-  }
+  // onCloseConfirm(){
+  //   this.thisDialogRef.close('Close');
+  // }
 
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');

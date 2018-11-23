@@ -10,7 +10,7 @@ import { Event } from '../events.model';
 @Component({
   selector: 'app-our-nav',
   templateUrl: './our-nav.component.html',
-  styleUrls: ['./our-nav.component.css'],
+  styleUrls: ['./our-nav.component.scss'],
 })
 export class OurNavComponent implements OnInit{
 

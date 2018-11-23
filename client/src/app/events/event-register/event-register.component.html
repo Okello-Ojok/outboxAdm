@@ -13,9 +13,6 @@
             
             <mat-button-toggle-group name="ourEvents" [ngModel]="ourEvents?.upcoming" #upcoming="ngModel" required>
               <mat-button-toggle *ngFor="let upcoming of events" [value]="upcoming" class="eventStyle">
-                <span class="name">{{upcoming.eventname}}</span>
-                
-          
                 <!-- <div class="post-submitted-info">
                     <div class="submitted-date">
                       <div class="month">{{upcoming.eventDate | date: 'MMM'}}</div>
@@ -30,11 +27,12 @@
                           <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-7 down-1" style="font-weight:900;font-size: 60px">
                             {{upcoming.eventDate | date: 'dd'}}
                           </span>
-                          <span class="fa-layers-text fa-inverse month" data-fa-transform="shrink-12 down-6" style="font-weight:800;text-transform: uppercase">
+                          <span class="fa-layers-text fa-inverse month" data-fa-transform="shrink-13 down-6" style="font-weight:800;text-transform: uppercase">
                             {{upcoming.eventDate | date: 'MMM'}}
                           </span>
                         </span>
                   </div>
+                  <span class="name">{{upcoming.eventname}}</span>
                   
 
 
@@ -60,6 +58,7 @@
                 <mat-form-field class="full-width">
                   <input matInput placeholder="First Name" [ngModel]="attendee?.firstname" name="firstname" #firstname="ngModel"
                     required>
+                    <mat-error *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">Enter your firstname</mat-error>
                 </mat-form-field>
               </td>
 
@@ -67,6 +66,7 @@
                 <mat-form-field class="full-width">
                   <input matInput placeholder="Last Name" [ngModel]="attendee?.lastname" name="lastname" #lastname="ngModel"
                     required>
+                    <mat-error *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">Enter your lastname</mat-error>
                 </mat-form-field>
               </td>
             </tr>
@@ -77,12 +77,14 @@
                 <mat-form-field class="full-width">
                   <input matInput placeholder="Email" [ngModel]="attendee?.email" name="email" #email="ngModel"
                     required>
+                    <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">Enter your email</mat-error>
                 </mat-form-field>
               </td>
               <td>
                 <mat-form-field class="full-width">
                   <input matInput placeholder="Telephone" [ngModel]="attendee?.telephone" name="telephone" #telephone="ngModel"
                     required>
+                    <mat-error *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">Enter your telephone number</mat-error>
                 </mat-form-field>
               </td>
 
@@ -97,6 +99,7 @@
                       {{sex}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="sex.invalid && (sex.dirty || sex.touched)">Select your gender</mat-error>
                 </mat-form-field>
               </td>
 
@@ -108,11 +111,12 @@
                       {{occupation}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="occupation.invalid && (occupation.dirty || occupation.touched)">Select an option</mat-error>
                 </mat-form-field>
               </td>
             </tr>
           </table>
-          <button mat-raised-button type="submit" color="primary">Register</button>
+          <button mat-raised-button [disabled]="!attendeeForm.form.valid" type="submit" color="primary" (click)="openDialog()">Register</button>
         </form>
 
       </mat-card>

@@ -5,7 +5,7 @@ import { Resident } from '../residents';
 @Component({
   selector: 'app-user-reg',
   templateUrl: './user-reg.component.html',
-  styleUrls: ['./user-reg.component.css']
+  styleUrls: ['./user-reg.component.scss']
 })
 export class UserRegComponent implements OnInit {
 

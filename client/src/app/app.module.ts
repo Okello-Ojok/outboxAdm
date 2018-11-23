@@ -10,8 +10,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatDialogModule, MatButtonToggleModule, MatBadgeModule, MatFormFieldModule, MatAutocompleteModule, MatButtonModule, MatProgressSpinnerModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatInputModule, MatSelectModule, MatOptionModule, MatRadioModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 import { OurNavComponent } from './our-nav/our-nav.component';
-import { MyDashComponent } from './my-dash/my-dash.component';
-import { MyTableComponent } from './my-table/my-table.component';
 import { AssetsComponent } from './assets/assets/assets.component';
 import { LoginComponent } from './login/login.component';
 import { UserRegComponent } from './user-reg/user-reg.component';
@@ -32,7 +30,7 @@ import { EventAttendeeComponent } from './event-attendee/event-attendee.componen
 import { EventsBoardComponent } from './events/events-board/events-board.component';
 import { LoadingComponent } from './loading.component';
 import { PageUnder0constructionComponent } from './page-under0construction/page-under0construction.component';
-import { ChartsComponent } from './charts/charts.component';
+
 import { SubmitEventComponent } from './dialogs/submit-event/submit-event.component';
 import { SubmitAttendComponent } from './dialogs/submit-attend/submit-attend.component';
 
@@ -40,8 +38,7 @@ import { SubmitAttendComponent } from './dialogs/submit-attend/submit-attend.com
   declarations: [
     AppComponent,
     OurNavComponent,
-    MyDashComponent,
-    MyTableComponent,
+    
     AssetsComponent,
     LoginComponent,
     UserRegComponent,
@@ -60,7 +57,7 @@ import { SubmitAttendComponent } from './dialogs/submit-attend/submit-attend.com
     EventsBoardComponent,
     LoadingComponent,
     PageUnder0constructionComponent,
-    ChartsComponent,
+    
     SubmitEventComponent,
     SubmitAttendComponent
   ],
@@ -96,8 +93,9 @@ import { SubmitAttendComponent } from './dialogs/submit-attend/submit-attend.com
     MatDialogModule
 
   ],
+  entryComponents: [SubmitEventComponent, SubmitAttendComponent],
   providers: [ResidentsService, EventsService],
-  bootstrap: [AppComponent],
-  entryComponents: [SubmitEventComponent]
+  bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

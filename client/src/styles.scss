@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-indigo);
+$my-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+
+@include angular-material-theme($my-app-theme);
+
 
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
@@ -12,6 +21,10 @@ html, body {
 
 button.mat-primary {
   background: #299ADF !important;
+}
+.mat-raised-button.mat-primary[disabled]{
+  color: white !important;
+  background: #66615b !important;
 }
 
 /* .mat-button-toggle-label-content {
@@ -116,6 +129,9 @@ button.mat-primary {
 
 .dialog{
   text-align: center;
+}
+.dialog img{
+  margin: 0 auto;
 }
 
 
