@@ -6,21 +6,26 @@ import { map, tap } from 'rxjs/operators';
 import { Router } from "@angular/router";
 import  * as config from './config/server.json';
 import { isDevMode } from '@angular/core';
+import { enableProdMode } from '@angular/core';
+
+
 
 
 import { Event } from './events.model';
 import { Attendee } from './events.model';
 
+
+enableProdMode();
 let addr = (<any>config).live_server;
-// if (isDevMode()) {
+if (isDevMode()) {
   
-//   addr = (<any>config).local_server;
-//   console.log('development');
-//  } else {
+  addr = (<any>config).local_server;
+  console.log('development');
+ } else {
   
   addr = (<any>config).live_server;
   console.log('live');
-//  }
+ }
 
 //import { Observable } from 'rxjs';
 
