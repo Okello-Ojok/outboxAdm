@@ -888,7 +888,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
 if (Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["isDevMode"])()) {
     // dev code
-    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["local_server"];
+    addr = _config_server_json__WEBPACK_IMPORTED_MODULE_5__["live_server"];
     console.log('development');
 }
 else {
