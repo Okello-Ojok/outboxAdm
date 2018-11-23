@@ -631,10 +631,10 @@ var CreateAssetComponent = /** @class */ (function () {
 /*!************************************!*\
   !*** ./src/app/config/server.json ***!
   \************************************/
-/*! exports provided: local_server, live_server, back_server, default */
+/*! exports provided: live_server, back_server, default */
 /***/ (function(module) {
 
-module.exports = {"local_server":"http://localhost:3000/api","live_server":"https://outboxdash.herokuapp.com/api","back_server":"/api"};
+module.exports = {"live_server":"https://outboxdash.herokuapp.com/api","back_server":"/api"};
 
 /***/ }),
 
