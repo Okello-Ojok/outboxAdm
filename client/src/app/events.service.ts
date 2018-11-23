@@ -7,12 +7,10 @@ import { Router } from "@angular/router";
 import  * as config from './config/server.json';
 import { isDevMode } from '@angular/core';
 import { enableProdMode } from '@angular/core';
-
-
-
-
 import { Event } from './events.model';
 import { Attendee } from './events.model';
+
+
 
 
 enableProdMode();
