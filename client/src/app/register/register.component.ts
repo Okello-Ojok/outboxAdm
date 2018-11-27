@@ -22,8 +22,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(public userService: UserService) {
     this.user = new User();
-    this.user.firstName = '';
-    this.user.lastName = '';
+    this.user.firstname = '';
+    this.user.lastname = '';
     this.user.email = '';
     this.user.password = '';
   }
